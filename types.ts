@@ -14,12 +14,18 @@ export interface FlightSegment {
   stops: string;
   airline: string;
   airline_logo: ReactNode;
+  is_problematic?: boolean;
+}
+
+export interface BaggageDetail {
+    status: 'Inclusa' | 'Não Inclusa' | 'Taxa Adicional';
+    details: string;
 }
 
 export interface BaggageInfo {
-    personal_item: string;
-    carry_on_overhead: string;
-    checked_baggage: string;
+    personal_item: BaggageDetail;
+    carry_on_overhead: BaggageDetail;
+    checked_baggage: BaggageDetail;
 }
 
 export interface Itinerary {
