@@ -1,0 +1,5 @@
+{
+  "name": "Caçador de Voos",
+  "description": "Um painel inteligente de monitoramento de voos que encontra as melhores ofertas de passagens aéreas, incluindo rotas de ida e volta e circulares, e simula o envio de alertas para preços baixos.",
+  "requestFramePermissions": []
+}
