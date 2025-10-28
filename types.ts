@@ -38,6 +38,7 @@ export interface Itinerary {
   baggage: BaggageInfo;
 }
 
+// FIX: Add UserConfig interface for user settings.
 export interface UserConfig {
     origins: string[];
     destinations: string[];
@@ -50,6 +51,7 @@ export interface UserConfig {
     };
 }
 
+// FIX: Add Flight interface for flight search results.
 export interface Flight {
     origin: string;
     destination: string;

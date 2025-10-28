@@ -1,4 +1,5 @@
 import { GoogleGenAI, Type } from "@google/genai";
+// FIX: Correctly import UserConfig and Flight types.
 import type { UserConfig, Flight } from '../types';
 
 const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });

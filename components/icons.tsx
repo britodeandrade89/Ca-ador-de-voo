@@ -1,101 +1,127 @@
 import React from 'react';
 
-export const RocketIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.82m5.84-2.56a12.022 12.022 0 01-11.68 0 12.022 12.022 0 0111.68 0z" />
-    <path strokeLinecap="round" strokeLinejoin="round" d="M12.75 3.75v16.5M12.75 3.75a2.25 2.25 0 00-4.5 0v16.5a2.25 2.25 0 004.5 0z" />
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 12h.008v.008H9.75V12zm3 0h.008v.008H12.75V12zm3 0h.008v.008H15.75V12zm-3-3h.008v.008H12.75V9zm3 0h.008v.008H15.75V9z" />
-    <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 9v-.008h.008V9H9.75z" />
-    <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 12h16.5m-16.5 0a2.25 2.25 0 01-2.25-2.25V7.5a2.25 2.25 0 012.25-2.25h16.5a2.25 2.25 0 012.25 2.25v2.25a2.25 2.25 0 01-2.25 2.25M3.75 12v6.75a2.25 2.25 0 002.25 2.25h12a2.25 2.25 0 002.25-2.25V12" />
+// Common props for icons
+type IconProps = React.SVGProps<SVGSVGElement>;
+
+export const BaggageIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M6 20h0a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h0"></path>
+    <path d="M8 18V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v14"></path>
+    <path d="M10 6h4"></path>
   </svg>
 );
 
-export const CalendarIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0h18" />
+export const ClockIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <circle cx="12" cy="12" r="10"></circle>
+    <polyline points="12 6 12 12 16 14"></polyline>
   </svg>
 );
 
-export const BaggageIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-    <path strokeLinecap="round" strokeLinejoin="round" d="M6 6.878V6a2.25 2.25 0 012.25-2.25h7.5A2.25 2.25 0 0118 6v.878m-12 0c.235-.083.487-.128.75-.128h10.5c.263 0 .515.045.75.128m-12 0A2.25 2.25 0 004.5 9v.878m13.5-3A2.25 2.25 0 0119.5 9v.878m0 0a2.246 2.246 0 00-.75-.128H5.25c-.263 0-.515.045-.75.128m15 0A2.25 2.25 0 0121 12v6a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 18v-6c0-.98.626-1.813 1.5-2.122" />
+export const AlertTriangleIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="m21.73 18-8-14a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path>
+        <line x1="12" y1="9" x2="12" y2="13"></line>
+        <line x1="12" y1="17" x2="12.01" y2="17"></line>
+    </svg>
+);
+
+export const LatamLogoIcon: React.FC<IconProps> = (props) => (
+    <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" fill="#003876" {...props}>
+        <text x="10" y="45" fontFamily="Helvetica, Arial, sans-serif" fontSize="40" fontWeight="bold">LATAM</text>
+    </svg>
+);
+
+export const SkyLogoIcon: React.FC<IconProps> = (props) => (
+    <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <text x="5" y="20" fontFamily="Verdana, sans-serif" fontSize="20" fontWeight="bold" fill="#00AEEF">
+            <tspan fill="#F58220">S</tspan>ky
+        </text>
+    </svg>
+);
+
+export const BoaLogoIcon: React.FC<IconProps> = (props) => (
+    <svg viewBox="0 0 100 25" xmlns="http://www.w3.org/2000/svg" fill="#00529B" {...props}>
+        <text x="5" y="20" fontFamily="Arial, sans-serif" fontSize="20" fontWeight="bold">
+            BoA
+        </text>
+    </svg>
+);
+
+export const HourglassIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M5 22h14"/>
+    <path d="M5 2h14"/>
+    <path d="M17 2v5l-3.3 3.3a1.5 1.5 0 0 1-2.4 0L8 7V2"/>
+    <path d="M17 22v-5l-3.3-3.3a1.5 1.5 0 0 0-2.4 0L8 17v5"/>
   </svg>
 );
 
+export const MapPinIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+    <circle cx="12" cy="10" r="3"></circle>
+  </svg>
+);
 
-export const ExternalLinkIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-4.5 0V6M13.5 6H18m0 0v4.5m0-4.5L7.5 15" />
+export const SuitcaseIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <rect x="2" y="7" width="20" height="14" rx="2" ry="2" />
+      <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+    </svg>
+  );
+  
+export const BackpackIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M5 20V10a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z" />
+        <path d="M8 8V6a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+        <path d="M9 14h6" />
     </svg>
 );
 
-export const LatamLogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-        <path d="M4.21,14.24l1.32,1.32,5.29-5.29V19h1.88V10.27L18,15.56l1.32-1.32L12,6.88Z"/>
-    </svg>
+// FIX: Add CalendarIcon component.
+export const CalendarIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+    <line x1="16" y1="2" x2="16" y2="6"></line>
+    <line x1="8" y1="2" x2="8" y2="6"></line>
+    <line x1="3" y1="10" x2="21" y2="10"></line>
+  </svg>
 );
 
-export const SkyLogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-       <path d="M12.42 12.35c.22-.22.4-.48.54-.75l.1-.2c.2-.4.32-.82.32-1.25a2.53 2.53 0 00-.8-1.8 2.53 2.53 0 00-1.8-.8 2.53 2.53 0 00-1.8.8 2.53 2.53 0 00-.8 1.8c0 .43.12.85.32 1.25l.1.2c.14.27.32.53.53.75l2.08 2.1c.22.22.5.33.78.33s.56-.1.78-.32zm5.72-2.1c-.22.2-.48.34-.75.45l-.2.08c-.4.15-.82.22-1.25.22a2.53 2.53 0 00-1.8.8 2.53 2.53 0 00-.8 1.8 2.53 2.53 0 00.8 1.8 2.53 2.53 0 001.8.8c.43 0 .85-.07 1.25-.22l.2-.08c.27-.1.53-.24.75-.45l2.1-1.57c.22-.16.33-.38.33-.6 0-.23-.1-.45-.32-.6zm-9.6-5.72c.1.27.15.55.15.83a2.4 2.4 0 01-.7 1.73 2.4 2.4 0 01-1.73.7 2.4 2.4 0 01-1.73-.7 2.4 2.4 0 01-.7-1.73c0-.28.05-.56.15-.83l.1-.26c.14-.37.35-.7.62-1L8.6 1.8c.22-.22.5-.33.78-.33s.56.1.78.32zM4.54 10.25c.43 0 .85-.07 1.25-.22l.2-.08c.27-.1.53-.24.75-.45L8.8 7.93c.22-.16.33-.38.33-.6s-.1-.45-.32-.6L6.74 5.16c-.22-.20-.48-.34-.75-.45l-.2-.08c-.4-.15-.82-.22-1.25-.22A2.53 2.53 0 002.74 6.2a2.53 2.53 0 00.8 1.8 2.53 2.53 0 001.8.8z" />
-    </svg>
+// FIX: Add RefreshIcon component.
+export const RefreshIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M23 4v6h-6"></path>
+    <path d="M1 20v-6h6"></path>
+    <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"></path>
+    <path d="M20.49 15a9 9 0 0 1-14.85 3.36L1 14"></path>
+  </svg>
 );
 
-
-export const ClockIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
+// FIX: Add PlaneTakeoffIcon component.
+export const PlaneTakeoffIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M2 22h20"/>
+    <path d="M6.36 17.43 3.41 14.48a2.3 2.3 0 0 1 0-3.25l2.49-2.49a2.3 2.3 0 0 1 3.25 0l2.83 2.83"/>
+    <path d="m21.29 12.7-5.3-5.3a2.3 2.3 0 0 0-3.25 0l-1.18 1.18"/>
+    <path d="m11.5 16.5 4.5-4.5"/>
+  </svg>
 );
 
-export const HourglassIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.092 1.21-.138 2.43-.138 3.662s.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.092-1.21.138-2.43.138-3.662z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 12.75V15m0-4.5v-1.5m0 0l-1.46-1.46a.75.75 0 010-1.06l1.46-1.46m0 4.02l1.46 1.46a.75.75 0 000 1.06l-1.46 1.46" />
-    </svg>
+// FIX: Add ExternalLinkIcon component.
+export const ExternalLinkIcon: React.FC<IconProps> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+    <polyline points="15 3 21 3 21 9"></polyline>
+    <line x1="10" y1="14" x2="21" y2="3"></line>
+  </svg>
 );
 
-export const MapPinIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
-    </svg>
-);
-
-export const BackpackIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.658-.463 1.243-1.119 1.243H5.502c-.656 0-1.19-.585-1.12-1.243l1.263-12A3.75 3.75 0 018.25 6h7.5a3.75 3.75 0 013.356 2.507z" />
-    </svg>
-);
-
-export const SuitcaseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 6.75h7.5v10.5h-7.5V6.75z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 17.25v2.25m-4.5-2.25v2.25m9-2.25v2.25M3.75 12.75h16.5M3.75 6.75h16.5v1.5H3.75v-1.5zM6 8.25v1.5m12-1.5v1.5" />
-    </svg>
-);
-
-export const RefreshIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0011.664 0l3.181-3.183m-4.991-2.693L19.015 7.747a8.25 8.25 0 00-11.664 0L2.985 14.652" />
-    </svg>
-);
-
-export const PlaneTakeoffIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M6 12 3.269 3.126A59.768 59.768 0 0 1 21.485 12 59.77 59.77 0 0 1 3.27 20.876L5.999 12zm0 0h7.5" />
-    </svg>
-);
-
-export const CogIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.962a8.25 8.25 0 015.7 5.7c.045.55-.422 1.02-.962 1.11l-1.591.318a2.25 2.25 0 00-1.423 1.423l-.318 1.59c-.09.542-.56 1.007-1.11.962a8.25 8.25 0 01-5.7-5.7c-.045-.55.422-1.02.962-1.11l1.591-.318a2.25 2.25 0 001.423-1.423l.318-1.591z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-    </svg>
-);
-
-export const AlertTriangleIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126z" />
+// FIX: Add CogIcon component.
+export const CogIcon: React.FC<IconProps> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" {...props}>
+        <path d="M19.14 12.94c.04-.3.06-.61.06-.94s-.02-.64-.07-.94l2.03-1.58a.5.5 0 0 0 .12-.61l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54a.5.5 0 0 0-.5-.44h-3.84a.5.5 0 0 0-.5.44l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22l-1.92 3.32a.5.5 0 0 0 .12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58a.5.5 0 0 0-.12.61l1.92 3.32a.5.5 0 0 0 .61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54a.5.5 0 0 0 .5.44h3.84a.5.5 0 0 0 .5-.44l.36 2.54c.59-.24 1.13-.56 1.62-.94l2.39.96a.5.5 0 0 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.61l-2.03-1.58z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
     </svg>
 );

@@ -3,7 +3,8 @@ import Dashboard from './components/Dashboard';
 
 const App: React.FC = () => {
   return (
-    <div className="min-h-screen bg-slate-100 text-slate-800 font-sans">
+    // FIX: Removed theme classes to let Dashboard component control styling for consistency.
+    <div className="font-sans">
       <Dashboard />
     </div>
   );
