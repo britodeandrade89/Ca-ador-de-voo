@@ -1,3 +1,4 @@
+
 import React from 'react';
 import type { UserConfig } from '../types';
 import { CogIcon } from './icons';

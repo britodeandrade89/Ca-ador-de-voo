@@ -1,3 +1,4 @@
+
 import React from 'react';
 import type { Flight } from '../types';
 import { CalendarIcon, BaggageIcon, RefreshIcon, PlaneTakeoffIcon, ExternalLinkIcon } from './icons';

@@ -1,8 +1,9 @@
+
 import { GoogleGenAI, Type } from "@google/genai";
-// FIX: Correctly import UserConfig and Flight types.
 import type { UserConfig, Flight } from '../types';
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
+// FIX: Initialize the Gemini AI client using the API key from environment variables as per guidelines.
+const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const flightSchema = {
     type: Type.OBJECT,
@@ -45,6 +46,7 @@ export const searchFlights = async (config: UserConfig): Promise<Flight[]> => {
             },
         });
         
+        // FIX: Extract text response directly from response.text as per guidelines.
         const jsonText = response.text;
         const flights = JSON.parse(jsonText) as Flight[];
         
