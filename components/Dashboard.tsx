@@ -6,7 +6,9 @@ import {
   SuitcaseIcon, TrainIcon, MapPinIcon, BoaLogoIcon, ActivityIcon,
   BedIcon,
   BaggageIcon,
+  UsersIcon,
 } from './icons';
+import ImageUploader from './ImageUploader';
 
 const initialItineraries: Itinerary[] = [
   // OPÇÃO 1
@@ -15,7 +17,7 @@ const initialItineraries: Itinerary[] = [
     title: 'Opção 1: LATAM - Sky Airline (Conexão Longa)',
     savedDate: '2024-07-26',
     totalPrice: 1954,
-    googleFlightsUrl: 'https://www.google.com/travel/flights',
+    sourceUrl: 'https://www.google.com/travel/flights',
     events: [
        { type: 'flight', startTime: '04:00', endTime: '07:00', startDate: '20 de jan', endDate: '20 de jan', startLocation: 'GRU', endLocation: 'LIM', duration: '5h', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'Latam Airlines Brasil' },
        { type: 'flight', startTime: '04:50', endTime: '06:15', startDate: '26 de jan', endDate: '26 de jan', startLocation: 'LIM', endLocation: 'CUZ', duration: '1h 25m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'Latam Airlines Peru' },
@@ -33,7 +35,7 @@ const initialItineraries: Itinerary[] = [
     title: 'Opção 2: BoA - LATAM - Sky',
     savedDate: '2024-07-26',
     totalPrice: 2354,
-    googleFlightsUrl: 'https://www.google.com/travel/flights',
+    sourceUrl: 'https://www.google.com/travel/flights',
     events: [
         { type: 'flight', startTime: '14:00', endTime: '18:25', startDate: '19 de jan', endDate: '19 de jan', startLocation: 'GRU', endLocation: 'LPB', duration: '5h 25m', details: '1 parada em VVI', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> }, warning: 'Conexão de 1h 30m em VVI' },
         { type: 'flight', startTime: '16:30', endTime: '18:00', startDate: '26 de jan', endDate: '26 de jan', startLocation: 'CUZ', endLocation: 'LIM', duration: '1h 30m', details: 'Sem escalas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'Latam Airlines Peru' },
@@ -52,7 +54,7 @@ const initialItineraries: Itinerary[] = [
     subtitle: 'Preço total estimado',
     savedDate: '2024-07-26',
     totalPrice: 2322 + 436.48 + 400 + 60 + 60 + 249.75,
-    googleFlightsUrl: 'https://www.google.com/travel/flights',
+    sourceUrl: 'https://www.google.com/travel/flights',
     events: [
         { type: 'flight', startTime: '14:00', endTime: '18:25', startDate: '19 de jan', endDate: '19 de jan', startLocation: 'GRU', endLocation: 'LPB', duration: '5h 25m', details: '1 parada em VVI', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> }, warning: 'Conexão de 1h 30m em VVI' },
         { type: 'accommodation', startTime: 'Check-in', endTime: 'Check-out', startDate: '19 de jan', endDate: '22 de jan', startLocation: 'La Paz', endLocation: 'Luxstone Executive & Suites', duration: '3 noites', details: 'Estadia para 2 adultos', company: { name: 'Booking.com', logo: <BedIcon className="h-6 w-6 text-indigo-600"/> } },
@@ -79,7 +81,7 @@ const initialItineraries: Itinerary[] = [
     title: 'Opção 4: BoA - Sky - LATAM (Monitorado)',
     savedDate: '2024-07-27',
     totalPrice: 2545,
-    googleFlightsUrl: 'https://www.google.com/travel/flights/search?tfs=CBwQAhojEgoyMDI2LTAxLTE5agcIARIDR1JVcgwIAxIIL20vMGJycTQaKBIKMjAyNi0wMS0yNmoMCAMSCC9tLzBqbGQzcgwIAxIIL20vMGxwZmgaIxIKMjAyNi0wMS0zMWoMCAMSCC9tLzBscGZocgcIARIDR1JVQAFIAXABggELCP___________wGYAQM&tfu=EgIIACIA&hl=pt-BR&gl=br&curr=BRL',
+    sourceUrl: 'https://www.google.com/travel/flights/search?tfs=CBwQAhojEgoyMDI2LTAxLTE5agcIARIDR1JVcgwIAxIIL20vMGJycTQaKBIKMjAyNi0wMS0yNmoMCAMSCC9tLzBqbGQzcgwIAxIIL20vMGxwZmgaIxIKMjAyNi0wMS0zMWoMCAMSCC9tLzBscGZocgcIARIDR1JVQAFIAXABggELCP___________wGYAQM&tfu=EgIIACIA&hl=pt-BR&gl=br&curr=BRL',
     events: [
         { type: 'flight', startTime: '14:00', endTime: '18:25', startDate: '19 de jan', endDate: '19 de jan', startLocation: 'GRU', endLocation: 'LPB', duration: '5h 25m', details: '1 parada em VVI', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> }, warning: 'Conexão de 1h 30m em VVI' },
         { type: 'flight', startTime: '12:10', endTime: '13:45', startDate: '26 de jan', endDate: '26 de jan', startLocation: 'CUZ', endLocation: 'LIM', duration: '1h 35m', details: 'Sem escalas', company: { name: 'Sky Airline', logo: <SkyLogoIcon className="h-6 w-6" /> }, operator: 'Sky Airline Peru Sac' },
@@ -93,6 +95,16 @@ const initialItineraries: Itinerary[] = [
     monitoring: { enabled: true },
   },
 ];
+
+const getCompanyLogo = (companyName: string) => {
+    const lowerCaseName = companyName.toLowerCase();
+    if (lowerCaseName.includes('latam')) return <LatamLogoIcon className="h-6 w-6" />;
+    if (lowerCaseName.includes('sky')) return <SkyLogoIcon className="h-6 w-6" />;
+    if (lowerCaseName.includes('boa') || lowerCaseName.includes('boliviana')) return <BoaLogoIcon className="h-6 w-6" />;
+    // Default logo
+    return <MapPinIcon className="h-6 w-6 text-slate-500" />;
+};
+
 
 const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
     const [currentPrice, setCurrentPrice] = useState(itinerary.totalPrice);
@@ -140,8 +152,8 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
                         {itinerary.subtitle && <p className="text-sm text-slate-500">{itinerary.subtitle}</p>}
                         <p className="text-sm text-slate-500">Salvo em: {itinerary.savedDate}</p>
                     </div>
-                    <a href={itinerary.googleFlightsUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1">
-                        Ver no Google Flights <ExternalLinkIcon className="h-4 w-4" />
+                    <a href={itinerary.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1">
+                        Ver Oferta Original <ExternalLinkIcon className="h-4 w-4" />
                     </a>
                 </div>
 
@@ -154,44 +166,71 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
                     {/* Timeline de Eventos */}
                     <div className="relative border-l-2 border-slate-200 ml-3 mt-6">
                         {itinerary.events.map((event, index) => {
-                             let eventBg, eventBorder;
+                             let eventBg, eventBorder, iconBg;
                              switch(event.type) {
                                 case 'bus':
                                     eventBg = 'bg-green-50';
                                     eventBorder = 'border-green-200';
+                                    iconBg = 'bg-green-100';
                                     break;
                                 case 'accommodation':
                                     eventBg = 'bg-indigo-50';
                                     eventBorder = 'border-indigo-200';
+                                    iconBg = 'bg-indigo-100';
                                     break;
                                 default: // flight
                                     eventBg = event.warning ? 'bg-amber-50' : 'bg-transparent';
                                     eventBorder = event.warning ? 'border-amber-300' : 'border-slate-200';
+                                    iconBg = 'bg-blue-100';
                                     break;
                              }
+                             
+                             // Dynamically assign logo if it's just a string from Gemini
+                             const eventLogo = typeof event.company.logo === 'string'
+                                ? getCompanyLogo(event.company.logo)
+                                : event.company.logo;
                             
                             return (
                             <div key={index} className={`mb-6 ml-8 p-4 rounded-lg border ${eventBg} ${eventBorder}`}>
-                                <span className="absolute flex items-center justify-center w-8 h-8 bg-blue-100 rounded-full -left-4 ring-4 ring-white">
-                                    {event.company.logo}
+                                <span className={`absolute flex items-center justify-center w-8 h-8 ${iconBg} rounded-full -left-4 ring-4 ring-white`}>
+                                    {eventLogo}
                                 </span>
-                                <div className="flex justify-between items-center">
-                                    <div>
-                                        <h3 className="text-lg font-bold text-slate-700">{event.startLocation} &rarr; {event.endLocation}</h3>
-                                        <p className="text-sm text-slate-500">{event.company.name} {event.operator && `(Operado por ${event.operator})`}</p>
-                                    </div>
-                                    <span className="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full">{event.startDate}</span>
-                                </div>
-                                <div className="mt-3 grid grid-cols-3 gap-4 text-sm text-slate-600">
-                                    <div className="flex items-center gap-2"><MapPinIcon className="h-4 w-4 text-slate-400" /> <span>{event.startTime} - {event.endTime}</span></div>
-                                    <div className="flex items-center gap-2"><HourglassIcon className="h-4 w-4 text-slate-400" /> <span>{event.duration}</span></div>
-                                    <div className="flex items-center gap-2"><MapPinIcon className="h-4 w-4 text-slate-400" /> <span>{event.details}</span></div>
-                                </div>
-                                {event.warning && (
-                                    <div className="mt-3 p-2 bg-amber-100 border border-amber-200 rounded-md text-amber-800 text-xs flex items-center gap-2">
-                                        <AlertTriangleIcon className="h-4 w-4" />
-                                        {event.warning}
-                                    </div>
+                                
+                                {event.type === 'accommodation' ? (
+                                    <>
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <h3 className="text-lg font-bold text-slate-700">Estadia em {event.startLocation}</h3>
+                                                <p className="text-sm text-slate-500">{event.endLocation}</p>
+                                            </div>
+                                            <span className="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full">{event.startDate} a {event.endDate}</span>
+                                        </div>
+                                        <div className="mt-3 grid grid-cols-2 gap-4 text-sm text-slate-600">
+                                            <div className="flex items-center gap-2"><HourglassIcon className="h-4 w-4 text-slate-400" /> <span>{event.duration}</span></div>
+                                            <div className="flex items-center gap-2"><UsersIcon className="h-4 w-4 text-slate-400" /> <span>{event.details}</span></div>
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                        <div className="flex justify-between items-center">
+                                            <div>
+                                                <h3 className="text-lg font-bold text-slate-700">{event.startLocation} &rarr; {event.endLocation}</h3>
+                                                <p className="text-sm text-slate-500">{event.company.name} {event.operator && `(Operado por ${event.operator})`}</p>
+                                            </div>
+                                            <span className="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full">{event.startDate}</span>
+                                        </div>
+                                        <div className="mt-3 grid grid-cols-3 gap-4 text-sm text-slate-600">
+                                            <div className="flex items-center gap-2"><MapPinIcon className="h-4 w-4 text-slate-400" /> <span>{event.startTime} - {event.endTime}</span></div>
+                                            <div className="flex items-center gap-2"><HourglassIcon className="h-4 w-4 text-slate-400" /> <span>{event.duration}</span></div>
+                                            <div className="flex items-center gap-2"><MapPinIcon className="h-4 w-4 text-slate-400" /> <span>{event.details}</span></div>
+                                        </div>
+                                        {event.warning && (
+                                            <div className="mt-3 p-2 bg-amber-100 border border-amber-200 rounded-md text-amber-800 text-xs flex items-center gap-2">
+                                                <AlertTriangleIcon className="h-4 w-4" />
+                                                {event.warning}
+                                            </div>
+                                        )}
+                                    </>
                                 )}
                             </div>
                         )})}
@@ -242,7 +281,7 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
                 )}
 
 
-                <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
+                {itinerary.baggage && <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
                     <h3 className="font-bold text-slate-700 mb-3">Detalhes da Bagagem</h3>
                     <ul className="space-y-3">
                         {[
@@ -262,7 +301,7 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
                             </li>
                         ))}
                     </ul>
-                </div>
+                </div>}
 
                 <p className="text-xs text-slate-400 mt-6 text-center">
                     As políticas de bagagem e os custos são estimativas. Sempre confirme as regras e valores no site da companhia aérea antes de comprar e voar.
@@ -274,6 +313,18 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
 
 
 const Dashboard: React.FC = () => {
+    const [itineraries, setItineraries] = useState<Itinerary[]>(initialItineraries);
+
+    const handleNewItinerary = (newItineraryData: Omit<Itinerary, 'id' | 'savedDate'>) => {
+        const newItinerary: Itinerary = {
+            ...newItineraryData,
+            id: Date.now(),
+            savedDate: new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }),
+            monitoring: { enabled: true },
+        };
+        setItineraries(prev => [newItinerary, ...prev]);
+    };
+
     return (
         <div className="min-h-screen bg-slate-100">
             <div className="max-w-4xl mx-auto px-4 py-8">
@@ -283,7 +334,8 @@ const Dashboard: React.FC = () => {
                 </header>
 
                 <main>
-                    {initialItineraries.map(itinerary => (
+                    <ImageUploader onItineraryCreated={handleNewItinerary} />
+                    {itineraries.map(itinerary => (
                         <ItineraryCard key={itinerary.id} itinerary={itinerary} />
                     ))}
                 </main>

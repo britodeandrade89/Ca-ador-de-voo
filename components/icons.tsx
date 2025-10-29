@@ -109,6 +109,11 @@ export const BedIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     </svg>
 );
 
+export const UsersIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M18 18.72a9.094 9.094 0 0 0-12 0m12 0a9.094 9.094 0 0 1-12 0m12 0v-4.5m-12 4.5v-4.5m12 0a4.5 4.5 0 0 0-4.5-4.5M12 9.75a4.5 4.5 0 0 1-4.5 4.5M12 9.75V3.75m0 6A4.5 4.5 0 0 1 7.5 9.75M3 14.25a4.5 4.5 0 0 1 4.5-4.5" />
+    </svg>
+);
 
 // FIX: Added CalendarIcon for use in FlightCard.
 export const CalendarIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (

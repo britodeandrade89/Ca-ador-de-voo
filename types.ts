@@ -81,9 +81,9 @@ export interface Itinerary {
   savedDate: string;
   totalPrice: number;
   events: TripEvent[];
-  baggage: BaggageInfo;
+  baggage?: BaggageInfo;
   additionalCosts?: AdditionalCost[];
-  googleFlightsUrl: string;
+  sourceUrl: string;
   monitoring?: {
     enabled: boolean;
   };
