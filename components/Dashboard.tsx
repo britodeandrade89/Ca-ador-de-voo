@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Itinerary, PriceHistoryItem } from '../types';
+import { Itinerary, PriceHistoryItem, TripEvent } from '../types';
 import {
   AlertTriangleIcon, BackpackIcon, BusIcon, CarIcon, DollarSignIcon,
   ExternalLinkIcon, HourglassIcon, LatamLogoIcon, SkyLogoIcon,
@@ -9,6 +9,39 @@ import {
   UsersIcon,
 } from './icons';
 import ImageUploader from './ImageUploader';
+
+// Helper to format YYYY-MM-DD into "DD de Mês"
+const formatDateForDisplay = (dateStr: string): string => {
+  if (!dateStr.includes('-')) return dateStr; // Return original if not in expected format
+  const [year, month, day] = dateStr.split('-');
+  const date = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+  // Using toLocaleDateString for robust internationalization
+  return date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'short' }).replace('.', '');
+};
+
+
+// FIX: Corrected the issue where clicking "Ver Oferta Original" resulted in an error page. The fix generates a dynamic search URL for LATAM flights, including origin, destination, and an accurate, well-formatted date.
+const generateLatamSearchUrl = (event: TripEvent): string => {
+    const baseUrl = 'https://www.latamairlines.com/br/pt/oferta-voos';
+    const origin = event.startLocation;
+    const destination = event.endLocation;
+    // The startDate is now in YYYY-MM-DD format, which is exactly what we need.
+    const formattedDate = event.startDate;
+
+    const params = new URLSearchParams({
+        origin: origin,
+        destination: destination,
+        outbound: `${formattedDate}T12:00:00.000Z`,
+        inbound: 'null',
+        adt: '1',
+        chd: '0',
+        inf: '0',
+        trip: 'OW' // One Way
+    });
+
+    return `${baseUrl}?${params.toString()}`;
+};
+
 
 const initialItineraries: Itinerary[] = [
   // VOOS DE IDA GRU -> BOG (JAN 2026) - Adicionados a partir dos prints com cotação de R$26/milheiro
@@ -20,7 +53,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1496,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '04:00', endTime: '19:10', startDate: '14 de jan', endDate: '14 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '17h 10m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Brasil | LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '04:00', endTime: '19:10', startDate: '2026-01-14', endDate: '2026-01-14', startLocation: 'GRU', endLocation: 'BOG', duration: '17h 10m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Brasil | LATAM Airlines Colombia' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -33,7 +66,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1496,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '01:50', endTime: '19:10', startDate: '13 de jan', endDate: '13 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '19h 20m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group, Vamos Air | LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '01:50', endTime: '19:10', startDate: '2026-01-13', endDate: '2026-01-13', startLocation: 'GRU', endLocation: 'BOG', duration: '19h 20m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group, Vamos Air | LATAM Airlines Colombia' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -46,7 +79,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1560,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '23:55', endTime: '04:10', startDate: '12 de jan', endDate: '13 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 15m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '23:55', endTime: '04:10', startDate: '2026-01-12', endDate: '2026-01-13', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 15m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -59,7 +92,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1633,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '01:50', endTime: '16:15', startDate: '11 de jan', endDate: '11 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '16h 25m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Group | LATAM Airlines Perú' },
+       { type: 'flight', startTime: '01:50', endTime: '16:15', startDate: '2026-01-11', endDate: '2026-01-11', startLocation: 'GRU', endLocation: 'BOG', duration: '16h 25m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Group | LATAM Airlines Perú' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -72,7 +105,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1573,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '10 de jan', endDate: '10 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '2026-01-10', endDate: '2026-01-10', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -85,7 +118,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1573,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '09 de jan', endDate: '09 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '2026-01-09', endDate: '2026-01-09', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -98,7 +131,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1633,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '16:30', endTime: '03:15', startDate: '08 de jan', endDate: '09 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '12h 45m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Perú | LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '16:30', endTime: '03:15', startDate: '2026-01-08', endDate: '2026-01-09', startLocation: 'GRU', endLocation: 'BOG', duration: '12h 45m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Perú | LATAM Airlines Colombia' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -111,7 +144,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1633,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '07 de jan', endDate: '07 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '2026-01-07', endDate: '2026-01-07', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -124,7 +157,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1496,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '07:35', endTime: '16:10', startDate: '01 de jan', endDate: '01 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '10h 35m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Brasil | LATAM Airlines Perú' },
+       { type: 'flight', startTime: '07:35', endTime: '16:10', startDate: '2026-01-01', endDate: '2026-01-01', startLocation: 'GRU', endLocation: 'BOG', duration: '10h 35m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Brasil | LATAM Airlines Perú' },
     ],
     baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
     monitoring: { enabled: true },
@@ -138,7 +171,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1633,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '31 de dez', endDate: '31 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '2025-12-31', endDate: '2025-12-31', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
     ],
     baggage: {
       personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
@@ -155,7 +188,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1633,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '21:20', endTime: '12:05', startDate: '30 de dez', endDate: '31 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '16h 45m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group' },
+       { type: 'flight', startTime: '21:20', endTime: '12:05', startDate: '2025-12-30', endDate: '2025-12-31', startLocation: 'GRU', endLocation: 'BOG', duration: '16h 45m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group' },
     ],
     baggage: {
       personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
@@ -172,7 +205,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1701,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '23:55', endTime: '04:10', startDate: '29 de dez', endDate: '30 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 15m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+       { type: 'flight', startTime: '23:55', endTime: '04:10', startDate: '2025-12-29', endDate: '2025-12-30', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 15m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
     ],
     baggage: {
       personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
@@ -189,7 +222,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1762,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '07:55', endTime: '20:50', startDate: '24 de dez', endDate: '24 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '14h 55m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM / Vamos Air' },
+       { type: 'flight', startTime: '07:55', endTime: '20:50', startDate: '2025-12-24', endDate: '2025-12-24', startLocation: 'GRU', endLocation: 'BOG', duration: '14h 55m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM, Vamos Air' },
     ],
     baggage: {
       personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
@@ -206,7 +239,7 @@ const initialItineraries: Itinerary[] = [
     totalPrice: 1710,
     sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
     events: [
-       { type: 'flight', startTime: '19:45', endTime: '12:05', startDate: '23 de dez', endDate: '24 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '18h 20m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group' },
+       { type: 'flight', startTime: '19:45', endTime: '12:05', startDate: '2025-12-23', endDate: '2025-12-24', startLocation: 'GRU', endLocation: 'BOG', duration: '18h 20m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Brasil, LATAM Airlines Colombia' },
     ],
     baggage: {
       personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
@@ -215,394 +248,274 @@ const initialItineraries: Itinerary[] = [
     },
     monitoring: { enabled: true },
   },
-  // OPÇÃO 1
-  {
-    id: 1,
-    title: 'Opção 1: LATAM - Sky Airline (Conexão Longa)',
-    savedDate: '2024-07-26',
-    totalPrice: 1954,
-    sourceUrl: 'https://www.google.com/travel/flights',
-    events: [
-       { type: 'flight', startTime: '04:00', endTime: '07:00', startDate: '20 de jan', endDate: '20 de jan', startLocation: 'GRU', endLocation: 'LIM', duration: '5h', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'Latam Airlines Brasil' },
-       { type: 'flight', startTime: '04:50', endTime: '06:15', startDate: '26 de jan', endDate: '26 de jan', startLocation: 'LIM', endLocation: 'CUZ', duration: '1h 25m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'Latam Airlines Peru' },
-       { type: 'flight', startTime: '21:45', endTime: '04:55', startDate: '01 de fev', endDate: '02 de fev', startLocation: 'CUZ', endLocation: 'GRU', duration: '29h 10m', details: '1 parada em LIM', company: { name: 'Sky Airline', logo: <SkyLogoIcon className="h-6 w-6" /> }, operator: 'Sky Airline Peru Sac', warning: 'Longa Conexão (22h 15m em LIM)' },
-    ],
-    baggage: {
-      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa) que vai abaixo do assento.' },
-      carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg que vai no compartimento superior.' },
-      checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a partir de R$210 por trecho/passageiro.' },
-    },
-  },
-  // OPÇÃO 2
-  {
-    id: 2,
-    title: 'Opção 2: BoA - LATAM - Sky',
-    savedDate: '2024-07-26',
-    totalPrice: 2354,
-    sourceUrl: 'https://www.google.com/travel/flights',
-    events: [
-        { type: 'flight', startTime: '14:00', endTime: '18:25', startDate: '19 de jan', endDate: '19 de jan', startLocation: 'GRU', endLocation: 'LPB', duration: '5h 25m', details: '1 parada em VVI', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> }, warning: 'Conexão de 1h 30m em VVI' },
-        { type: 'flight', startTime: '16:30', endTime: '18:00', startDate: '26 de jan', endDate: '26 de jan', startLocation: 'CUZ', endLocation: 'LIM', duration: '1h 30m', details: 'Sem escalas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'Latam Airlines Peru' },
-        { type: 'flight', startTime: '21:35', endTime: '04:55', startDate: '31 de jan', endDate: '01 de fev', startLocation: 'LIM', endLocation: 'GRU', duration: '5h 20m', details: 'Sem escalas', company: { name: 'Sky Airline', logo: <SkyLogoIcon className="h-6 w-6" /> }, operator: 'Sky Airline Peru Sac' },
-    ],
-     baggage: {
-      personal: { status: 'Inclusa', details: '1 item pessoal por trecho.' },
-      carryOn: { status: 'Inclusa', details: '1 bagagem de mão por trecho.' },
-      checked: { status: 'Taxa Adicional', details: 'Bagagem despachada cobrada à parte no trecho 2. Verifique políticas para os outros trechos.' },
-    },
-  },
-  // OPÇÃO 3
-  {
-    id: 3,
-    title: 'Opção 3: BoA - Sky (com ônibus e estadia)',
-    subtitle: 'Preço total estimado',
-    savedDate: '2024-07-26',
-    totalPrice: 2322 + 436.48 + 400 + 60 + 60 + 249.75,
-    sourceUrl: 'https://www.google.com/travel/flights',
-    events: [
-        { type: 'flight', startTime: '14:00', endTime: '18:25', startDate: '19 de jan', endDate: '19 de jan', startLocation: 'GRU', endLocation: 'LPB', duration: '5h 25m', details: '1 parada em VVI', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> }, warning: 'Conexão de 1h 30m em VVI' },
-        { type: 'accommodation', startTime: 'Check-in', endTime: 'Check-out', startDate: '19 de jan', endDate: '22 de jan', startLocation: 'La Paz', endLocation: 'Luxstone Executive & Suites', duration: '3 noites', details: 'Estadia para 2 adultos', company: { name: 'Booking.com', logo: <BedIcon className="h-6 w-6 text-indigo-600"/> } },
-        { type: 'bus', startTime: '15:30', endTime: '06:00', startDate: '22 de jan', endDate: '23 de jan', startLocation: 'La Paz', endLocation: 'Cusco', duration: '15h 30m', details: 'Terminal De Buses La Paz', company: { name: 'Transzela', logo: <BusIcon className="h-6 w-6 text-green-600" /> } },
-        { type: 'flight', startTime: '12:10', endTime: '13:45', startDate: '26 de jan', endDate: '26 de jan', startLocation: 'CUZ', endLocation: 'LIM', duration: '1h 35m', details: 'Sem escalas', company: { name: 'Sky Airline', logo: <SkyLogoIcon className="h-6 w-6" /> }, operator: 'Sky Airline Peru Sac' },
-        { type: 'flight', startTime: '21:35', endTime: '04:55', startDate: '31 de jan', endDate: '01 de fev', startLocation: 'LIM', endLocation: 'GRU', duration: '5h 20m', details: 'Sem escalas', company: { name: 'Sky Airline', logo: <SkyLogoIcon className="h-6 w-6" /> }, operator: 'Sky Airline Peru Sac' },
-    ],
-    baggage: {
-      personal: { status: 'Inclusa', details: '1 item pessoal por voo.' },
-      carryOn: { status: 'Inclusa', details: '1 bagagem de mão por voo.' },
-      checked: { status: 'Taxa Adicional', details: 'Sem bagagem despachada inclusa nos voos. Verifique a política de bagagem para o ônibus.' },
-    },
-    additionalCosts: [
-        { description: 'Estadia em La Paz (3 noites)', amount: 249.75, icon: <BedIcon className="h-5 w-5" /> },
-        { description: 'Ônibus La Paz -> Cusco (2 Adultos)', amount: 436.48, icon: <BusIcon className="h-5 w-5" /> },
-        { description: 'Transporte Cusco -> Machu Picchu (estimativa 2 adultos)', amount: 400, icon: <TrainIcon className="h-5 w-5" /> },
-        { description: 'Uber Aeroporto El Alto -> Centro (estimativa)', amount: 60, icon: <CarIcon className="h-5 w-5" /> },
-        { description: 'Uber Aeroporto Lima -> Miraflores (estimativa)', amount: 60, icon: <CarIcon className="h-5 w-5" /> },
-    ]
-  },
-  // OPÇÃO 4 - NOVA OPÇÃO COM MONITORAMENTO
   {
     id: 4,
-    title: 'Opção 4: BoA - Sky - LATAM (Monitorado)',
+    title: 'Estadia em Cusco, Peru',
     savedDate: '2024-07-27',
-    totalPrice: 2545,
-    sourceUrl: 'https://www.google.com/travel/flights/search?tfs=CBwQAhojEgoyMDI2LTAxLTE5agcIARIDR1JVcgwIAxIIL20vMGJycTQaKBIKMjAyNi0wMS0yNmoMCAMSCC9tLzBqbGQzcgwIAxIIL20vMGxwZmgaIxIKMjAyNi0wMS0zMWoMCAMSCC9tLzBscGZocgcIARIDR1JVQAFIAXABggELCP___________wGYAQM&tfu=EgIIACIA&hl=pt-BR&gl=br&curr=BRL',
+    totalPrice: 1850,
+    sourceUrl: 'https://www.booking.com/hotel/pe/cusco-hostal-rojas.pt-br.html',
     events: [
-        { type: 'flight', startTime: '14:00', endTime: '18:25', startDate: '19 de jan', endDate: '19 de jan', startLocation: 'GRU', endLocation: 'LPB', duration: '5h 25m', details: '1 parada em VVI', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> }, warning: 'Conexão de 1h 30m em VVI' },
-        { type: 'flight', startTime: '12:10', endTime: '13:45', startDate: '26 de jan', endDate: '26 de jan', startLocation: 'CUZ', endLocation: 'LIM', duration: '1h 35m', details: 'Sem escalas', company: { name: 'Sky Airline', logo: <SkyLogoIcon className="h-6 w-6" /> }, operator: 'Sky Airline Peru Sac' },
-        { type: 'flight', startTime: '00:30', endTime: '11:05', startDate: '31 de jan', endDate: '31 de jan', startLocation: 'LIM', endLocation: 'GRU', duration: '11h 35m', details: '1 parada em BSB', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'Latam Airlines Peru', warning: 'Longa Conexão (5h 15m em BSB)' },
+      { type: 'accommodation', startTime: '14:00', endTime: '11:00', startDate: '2026-01-05', endDate: '2026-01-12', startLocation: 'Cusco', endLocation: 'Cusco Hostal Rojas', duration: '7 noites', details: '2 adultos, 1 quarto', company: { name: 'Booking.com', logo: '🏨' } },
     ],
-     baggage: {
-      personal: { status: 'Inclusa', details: '1 item pessoal por trecho.' },
-      carryOn: { status: 'Inclusa', details: '1 bagagem de mão por trecho.' },
-      checked: { status: 'Taxa Adicional', details: 'Bagagem despachada cobrada à parte nos trechos da LATAM e Sky. Verifique política da BoA.' },
+    additionalCosts: [
+      { description: 'Taxa de limpeza', amount: 50, icon: <UsersIcon className="h-4 w-4" /> },
+      { description: 'Impostos municipais', amount: 120, icon: <DollarSignIcon className="h-4 w-4" /> },
+    ],
+    monitoring: { enabled: false },
+  },
+  {
+    id: 3,
+    title: 'Voo Circular para Bolívia',
+    savedDate: '2024-07-26',
+    totalPrice: 2150,
+    sourceUrl: 'https://www.google.com/travel/flights/search?tfs=CBwQAhpFEgoyMDI1LTEyLTIyagwIAhIIL20vMDNmMjByDQgDEgkvbS8wMWd3c2MaQxIKMjAyNi0wMS0wNGIMCAISCS9tLzA4NjRseioMCAISCC9tLzAzZjIwcg0IAxIIL20vMDZnNG5qBwgBEgNHUlVAAUgBcAGCAQsI____________AZgBAg&tfu=KgIIAw',
+    events: [
+      { type: 'flight', startTime: '06:30', endTime: '10:00', startDate: '2025-12-22', endDate: '2025-12-22', startLocation: 'GRU', endLocation: 'VVI', duration: '3h 30m', details: 'Direto', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> } },
+      { type: 'flight', startTime: '15:00', endTime: '16:00', startDate: '2026-01-04', endDate: '2026-01-04', startLocation: 'LPB', endLocation: 'GRU', duration: '3h 00m', details: 'Direto', company: { name: 'BoA', logo: <BoaLogoIcon className="h-6 w-6" /> } },
+    ],
+    baggage: {
+      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa)' },
+      carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg' },
+      checked: { status: 'Inclusa', details: '1 bagagem despachada de 23kg' },
+    },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 2,
+    title: 'Ônibus de São Paulo para Rio',
+    savedDate: '2024-07-25',
+    totalPrice: 250,
+    sourceUrl: 'https://www.clickbus.com.br/onibus/sao-paulo-sp/rio-de-janeiro-rj',
+    events: [
+      { type: 'bus', startTime: '23:00', endTime: '05:30', startDate: '2025-11-15', endDate: '2025-11-16', startLocation: 'Terminal Tietê, SP', endLocation: 'Rodoviária Novo Rio, RJ', duration: '6h 30m', details: 'Leito', company: { name: 'Viação 1001', logo: <BusIcon className="h-6 w-6" /> } },
+    ],
+    monitoring: { enabled: false },
+  },
+  {
+    id: 1,
+    title: 'Voo GOL para Lima',
+    savedDate: '2024-07-24',
+    totalPrice: 1570,
+    sourceUrl: 'https://www.google.com/travel/flights/search?tfs=CBwQAhpFEgoyMDI1LTEyLTIwagwIAhIIL20vMDNmMjByDQgDEgkvbS8wZGw0cho_EgoyMDI2LTAxLTA1ag0IAxIIL20vMGRsNGxyDAgCEggvbS8wM2YyMHIMCAISCC9tLzAzZjIwcg0IAxIIL20vMDZnNG5qBwgBEgNHUlVAAUgBcAGCAQsI____________AZgBAg&tfu=KgIIAw',
+    events: [
+      { type: 'flight', startTime: '21:00', endTime: '01:00', startDate: '2025-12-20', endDate: '2025-12-21', startLocation: 'GIG', endLocation: 'LIM', duration: '5h 00m', details: 'Direto', company: { name: 'SKY', logo: <SkyLogoIcon className="h-6 w-6" /> }, operator: 'Operado por GOL' },
+      { type: 'flight', startTime: '02:00', endTime: '10:00', startDate: '2026-01-05', endDate: '2026-01-05', startLocation: 'LIM', endLocation: 'GIG', duration: '5h 00m', details: 'Direto', company: { name: 'SKY', logo: <SkyLogoIcon className="h-6 w-6" /> }, warning: 'Voo de madrugada' },
+    ],
+    baggage: {
+      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa)' },
+      carryOn: { status: 'Taxa Adicional', details: 'A partir de R$ 120' },
+      checked: { status: 'Taxa Adicional', details: 'A partir de R$ 180' },
     },
     monitoring: { enabled: true },
   },
 ];
 
-const getCompanyLogo = (companyName: string) => {
-    const lowerCaseName = companyName.toLowerCase();
-    if (lowerCaseName.includes('latam')) return <LatamLogoIcon className="h-6 w-6" />;
-    if (lowerCaseName.includes('sky')) return <SkyLogoIcon className="h-6 w-6" />;
-    if (lowerCaseName.includes('boa') || lowerCaseName.includes('boliviana')) return <BoaLogoIcon className="h-6 w-6" />;
-    if (lowerCaseName.includes('booking')) return <BedIcon className="h-6 w-6 text-indigo-600"/>;
-    // Default logo
-    return <MapPinIcon className="h-6 w-6 text-slate-500" />;
-};
 
+const Dashboard: React.FC = () => {
+  const [itineraries, setItineraries] = useState<Itinerary[]>(initialItineraries);
+  const [hasApiKey, setHasApiKey] = useState(false);
+  const [isKeyChecked, setIsKeyChecked] = useState(false);
 
-const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
-    const [currentPrice, setCurrentPrice] = useState(itinerary.totalPrice);
-    const [priceHistory, setPriceHistory] = useState<PriceHistoryItem[]>([]);
-    const [lastChecked, setLastChecked] = useState<Date | null>(null);
+  useEffect(() => {
+    const checkApiKey = async () => {
+      if (window.aistudio) {
+        const keyStatus = await window.aistudio.hasSelectedApiKey();
+        setHasApiKey(keyStatus);
+      }
+      setIsKeyChecked(true);
+    };
+    checkApiKey();
+  }, []);
 
-    useEffect(() => {
-        if (!itinerary.monitoring?.enabled) return;
+  const handleSelectKey = async () => {
+    if (window.aistudio) {
+      await window.aistudio.openSelectKey();
+      setHasApiKey(true); // Assume success after opening dialog to avoid race condition
+    }
+  };
 
-        const initialHistoryItem: PriceHistoryItem = {
-            timestamp: new Date(),
-            price: itinerary.totalPrice,
-        };
-        setPriceHistory([initialHistoryItem]);
-        setLastChecked(initialHistoryItem.timestamp);
+  const handleNewItinerary = (newItineraryData: Omit<Itinerary, 'id' | 'savedDate'>) => {
+    const newItinerary: Itinerary = {
+      ...newItineraryData,
+      id: Date.now(),
+      savedDate: new Date().toISOString().split('T')[0],
+      monitoring: { enabled: newItineraryData.events[0]?.type === 'flight' }
+    };
 
-        const interval = setInterval(() => {
-            setCurrentPrice(prevPrice => {
-                const changePercentage = (Math.random() - 0.5) * 0.1; // Flutuação de +/- 5%
-                const newPrice = Math.round(prevPrice * (1 + changePercentage));
+    // Ajusta os logos com base no nome da companhia
+    newItinerary.events.forEach(event => {
+      if (event.company.name.toLowerCase().includes('latam')) {
+        event.company.logo = <LatamLogoIcon className="h-6 w-6" />;
+      } else if (event.company.name.toLowerCase().includes('sky')) {
+        event.company.logo = <SkyLogoIcon className="h-6 w-6" />;
+      } else if (event.company.name.toLowerCase().includes('boa') || event.company.name.toLowerCase().includes('boliviana')) {
+        event.company.logo = <BoaLogoIcon className="h-6 w-6" />;
+      } else if (event.type === 'accommodation') {
+        event.company.logo = <BedIcon className="h-6 w-6" />;
+      } else if (event.type === 'bus') {
+        event.company.logo = <BusIcon className="h-6 w-6" />;
+      }
+    });
 
-                const newHistoryItem: PriceHistoryItem = {
-                    timestamp: new Date(),
-                    price: newPrice,
-                };
-                setPriceHistory(prev => [newHistoryItem, ...prev.slice(0, 4)]);
-                setLastChecked(newHistoryItem.timestamp);
+    setItineraries(prev => [newItinerary, ...prev]);
+  };
 
-                return newPrice;
-            });
-        }, 15000); // A cada 15 segundos para demonstração
+  const handleApiKeyError = () => {
+    setHasApiKey(false);
+    alert("Sua chave de API parece inválida ou não foi encontrada. Por favor, selecione uma chave válida para continuar.");
+  };
 
-        return () => clearInterval(interval);
-    }, [itinerary.monitoring, itinerary.totalPrice]);
+  if (!isKeyChecked) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-900">
+        <ActivityIcon className="h-12 w-12 text-cyan-400 animate-spin" />
+      </div>
+    );
+  }
 
-    const totalAdditionalCost = itinerary.additionalCosts?.reduce((sum, cost) => sum + cost.amount, 0) ?? 0;
-    const displayPrice = itinerary.monitoring?.enabled ? currentPrice : (itinerary.totalPrice);
+  if (!hasApiKey) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900 text-white p-4 text-center">
+        <h1 className="text-3xl font-bold mb-4">Bem-vindo ao Diário de Bordo</h1>
+        <p className="mb-6 max-w-md text-slate-300">Para começar a analisar capturas de tela de viagens com a API do Gemini, por favor, selecione uma chave de API do Google AI Studio.</p>
+        <button
+          onClick={handleSelectKey}
+          className="bg-cyan-600 hover:bg-cyan-700 text-white font-bold py-3 px-6 rounded-lg transition-colors"
+        >
+          Selecionar Chave de API
+        </button>
+        <p className="text-xs text-slate-500 mt-4">
+            Isso é necessário para usar os recursos de IA da aplicação.
+            <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noopener noreferrer" className="underline hover:text-cyan-400 ml-1">
+                Saiba mais sobre cobrança.
+            </a>
+        </p>
+      </div>
+    );
+  }
+
+  const sortedItineraries = [...itineraries].sort((a, b) => b.id - a.id);
+
+  const getEventTypeIcon = (type: string) => {
+    switch (type) {
+      case 'flight': return <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.428A1 1 0 0010 16.5v-13z" /><path d="M10 16.5a1 1 0 01-1.447-.894l-7-14a1 1 0 011.169-1.409l5 1.428A1 1 0 0110 3.5v13z" /></svg>;
+      case 'accommodation': return <BedIcon className="h-5 w-5" />;
+      case 'bus': return <BusIcon className="h-5 w-5" />;
+      case 'car': return <CarIcon className="h-5 w-5" />;
+      case 'train': return <TrainIcon className="h-5 w-5" />;
+      default: return <ActivityIcon className="h-5 w-5" />;
+    }
+  };
+
+  const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
+    const mainEvent = itinerary.events[0];
+    if (!mainEvent) return null;
+  
+    const eventTypeIcon = getEventTypeIcon(mainEvent.type);
 
     return (
-        <div className="bg-white rounded-xl shadow-md overflow-hidden mb-8 border border-slate-200">
-            <div className="p-6">
+        <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-200 hover:border-blue-500 transition-all duration-300 hover:shadow-2xl group">
+            <div className="p-5">
                 <div className="flex justify-between items-start">
                     <div>
-                        <h2 className="text-xl font-bold text-slate-800">{itinerary.title}</h2>
-                        {itinerary.subtitle && <p className="text-sm text-slate-500">{itinerary.subtitle}</p>}
-                        <p className="text-sm text-slate-500">Salvo em: {itinerary.savedDate}</p>
-                    </div>
-                    <a href={itinerary.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-sm text-blue-600 hover:text-blue-800 font-semibold flex items-center gap-1">
-                        Ver Oferta Original <ExternalLinkIcon className="h-4 w-4" />
-                    </a>
-                </div>
-
-                <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
-                    <div className="flex justify-between items-center mb-4">
-                        <span className="text-md font-semibold text-slate-600">{itinerary.subtitle ? 'Preço Estimado' : 'Preço Total'}</span>
-                        <span className="text-3xl font-bold text-green-600">R$ {displayPrice.toLocaleString('pt-BR')}</span>
-                    </div>
-
-                    {/* Timeline de Eventos */}
-                    <div className="relative border-l-2 border-slate-200 ml-3 mt-6">
-                        {itinerary.events.map((event, index) => {
-                             let eventBg, eventBorder, iconBg;
-                             switch(event.type) {
-                                case 'bus':
-                                    eventBg = 'bg-green-50';
-                                    eventBorder = 'border-green-200';
-                                    iconBg = 'bg-green-100';
-                                    break;
-                                case 'accommodation':
-                                    eventBg = 'bg-indigo-50';
-                                    eventBorder = 'border-indigo-200';
-                                    iconBg = 'bg-indigo-100';
-                                    break;
-                                default: // flight
-                                    eventBg = event.warning ? 'bg-amber-50' : 'bg-transparent';
-                                    eventBorder = event.warning ? 'border-amber-300' : 'border-slate-200';
-                                    iconBg = 'bg-blue-100';
-                                    break;
-                             }
-                             
-                             const eventLogo = typeof event.company.logo === 'string'
-                                ? getCompanyLogo(event.company.logo)
-                                : event.company.logo;
-                            
-                            return (
-                            <div key={index} className={`mb-6 ml-8 p-4 rounded-lg border ${eventBg} ${eventBorder}`}>
-                                <span className={`absolute flex items-center justify-center w-8 h-8 ${iconBg} rounded-full -left-4 ring-4 ring-white`}>
-                                    {eventLogo}
-                                </span>
-                                
-                                {event.type === 'accommodation' ? (
-                                    <>
-                                        <div className="flex justify-between items-center">
-                                            <div>
-                                                <h3 className="text-lg font-bold text-slate-700">Estadia em {event.startLocation}</h3>
-                                                <p className="text-sm text-slate-500">{event.endLocation}</p>
-                                            </div>
-                                            <span className="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full">{event.startDate} a {event.endDate}</span>
-                                        </div>
-                                        <div className="mt-3 grid grid-cols-2 gap-4 text-sm text-slate-600">
-                                            <div className="flex items-center gap-2"><HourglassIcon className="h-4 w-4 text-slate-400" /> <span>{event.duration}</span></div>
-                                            <div className="flex items-center gap-2"><UsersIcon className="h-4 w-4 text-slate-400" /> <span>{event.details}</span></div>
-                                        </div>
-                                    </>
-                                ) : (
-                                    <>
-                                        <div className="flex justify-between items-center">
-                                            <div>
-                                                <h3 className="text-lg font-bold text-slate-700">{event.startLocation} &rarr; {event.endLocation}</h3>
-                                                <p className="text-sm text-slate-500">{event.company.name} {event.operator && `(Operado por ${event.operator})`}</p>
-                                            </div>
-                                            <span className="bg-slate-100 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full">{event.startDate}</span>
-                                        </div>
-                                        <div className="mt-3 grid grid-cols-3 gap-4 text-sm text-slate-600">
-                                            <div className="flex items-center gap-2"><MapPinIcon className="h-4 w-4 text-slate-400" /> <span>{event.startTime} - {event.endTime}</span></div>
-                                            <div className="flex items-center gap-2"><HourglassIcon className="h-4 w-4 text-slate-400" /> <span>{event.duration}</span></div>
-                                            <div className="flex items-center gap-2"><MapPinIcon className="h-4 w-4 text-slate-400" /> <span>{event.details}</span></div>
-                                        </div>
-                                        {event.warning && (
-                                            <div className="mt-3 p-2 bg-amber-100 border border-amber-200 rounded-md text-amber-800 text-xs flex items-center gap-2">
-                                                <AlertTriangleIcon className="h-4 w-4" />
-                                                {event.warning}
-                                            </div>
-                                        )}
-                                    </>
-                                )}
-                            </div>
-                        )})}
-                    </div>
-                </div>
-
-                {itinerary.additionalCosts && itinerary.additionalCosts.length > 0 && (
-                     <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
-                         <h3 className="font-bold text-slate-700 mb-3">Estimativa de Custos Adicionais</h3>
-                         <ul className="space-y-2">
-                             {itinerary.additionalCosts.map((cost, i) => (
-                                 <li key={i} className="flex justify-between items-center text-sm">
-                                     <span className="flex items-center gap-2 text-slate-600">{cost.icon} {cost.description}</span>
-                                     <span className="font-semibold text-slate-800">R$ {cost.amount.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
-                                 </li>
-                             ))}
-                             <li className="flex justify-between items-center text-sm font-bold border-t pt-2 mt-2 border-slate-200">
-                                 <span className="flex items-center gap-2 text-slate-700"><DollarSignIcon className="h-5 w-5" /> Subtotal</span>
-                                 <span className="text-slate-900">R$ {totalAdditionalCost.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</span>
-                             </li>
-                         </ul>
-                     </div>
-                 )}
-                
-                {itinerary.monitoring?.enabled && (
-                    <div className="mt-4 p-4 rounded-lg bg-blue-50 border border-blue-200">
-                        <div className="flex justify-between items-center mb-4">
-                            <h3 className="font-bold text-blue-800 flex items-center gap-2">
-                                <ActivityIcon className="h-5 w-5 animate-pulse"/>
-                                Monitoramento de Preço Ativo
-                            </h3>
-                            <span className="text-xs text-blue-600">
-                                {lastChecked ? `Última verificação: ${lastChecked.toLocaleTimeString('pt-BR')}` : 'Aguardando primeira verificação...'}
-                            </span>
+                        <div className="flex items-center text-slate-500 mb-1">
+                            {eventTypeIcon}
+                            <span className="ml-2 text-sm font-medium capitalize">{mainEvent.type}</span>
+                            <span className="mx-2">&middot;</span>
+                            <span className="text-sm">Salvo em {new Date(itinerary.savedDate).toLocaleDateString('pt-BR')}</span>
                         </div>
-                        <div className="max-h-32 overflow-y-auto pr-2">
-                            <ul className="space-y-1">
-                                {priceHistory.map(item => (
-                                    <li key={item.timestamp.toISOString()} className="flex justify-between items-center text-sm bg-white p-2 rounded">
-                                        <span className="text-slate-500">{item.timestamp.toLocaleString('pt-BR')}</span>
-                                        <span className={`font-semibold ${item.price > (priceHistory[priceHistory.length-1]?.price ?? 0) ? 'text-red-500' : 'text-green-600'}`}>R$ {item.price.toLocaleString('pt-BR')}</span>
-                                    </li>
-                                ))}
-                            </ul>
+                        <h3 className="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors">{itinerary.title}</h3>
+                         {itinerary.subtitle && <p className="text-sm text-slate-500">{itinerary.subtitle}</p>}
+                    </div>
+                    <div className="text-right flex-shrink-0 ml-4">
+                        <p className="text-sm text-slate-500">Total</p>
+                        <p className="text-2xl font-extrabold text-slate-800">R$ {itinerary.totalPrice.toLocaleString('pt-BR')}</p>
+                    </div>
+                </div>
+
+                <div className="mt-4 border-t border-slate-200 pt-4">
+                    {itinerary.events.map((event, index) => (
+                        <div key={index} className={`flex items-center space-x-4 ${index > 0 ? 'mt-3' : ''}`}>
+                            <div className="flex-shrink-0 text-slate-500">{event.company.logo}</div>
+                            <div className="flex-grow">
+                                <div className="flex items-center font-semibold text-slate-700">
+                                    <span>{event.startTime}</span>
+                                    <span className="mx-2 text-slate-300">&rarr;</span>
+                                    <span>{event.endTime}</span>
+                                    <span className="ml-auto text-sm font-normal text-slate-500 flex items-center">
+                                        <HourglassIcon className="h-4 w-4 mr-1.5" />
+                                        {event.duration}
+                                    </span>
+                                </div>
+                                <div className="flex items-center text-sm text-slate-500">
+                                    <span>{event.startLocation} ({formatDateForDisplay(event.startDate)})</span>
+                                    <span className="mx-2 text-slate-300">&rarr;</span>
+                                    <span>{event.endLocation} ({formatDateForDisplay(event.endDate)})</span>
+                                </div>
+                                 {event.operator && <div className="text-xs text-slate-400 mt-1">Operado por: {event.operator}</div>}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                {itinerary.baggage && (
+                    <div className="mt-4 border-t border-slate-200 pt-4">
+                        <h4 className="text-sm font-bold text-slate-600 mb-2">Franquia de Bagagem</h4>
+                        <div className="grid grid-cols-3 gap-4 text-center text-xs">
+                            <div className="bg-slate-50 p-2 rounded-lg">
+                                <BackpackIcon className="h-5 w-5 mx-auto text-slate-500 mb-1" />
+                                <p className="font-semibold text-slate-700">Item Pessoal</p>
+                                <p className="text-slate-500">{itinerary.baggage.personal.status}</p>
+                            </div>
+                            <div className="bg-slate-50 p-2 rounded-lg">
+                                <BaggageIcon className="h-5 w-5 mx-auto text-slate-500 mb-1" />
+                                <p className="font-semibold text-slate-700">Mala de Mão</p>
+                                <p className="text-slate-500">{itinerary.baggage.carryOn.status}</p>
+                            </div>
+                            <div className="bg-slate-50 p-2 rounded-lg">
+                                <SuitcaseIcon className="h-5 w-5 mx-auto text-slate-500 mb-1" />
+                                <p className="font-semibold text-slate-700">Mala Despachada</p>
+                                <p className="text-slate-500">{itinerary.baggage.checked.status}</p>
+                            </div>
                         </div>
                     </div>
                 )}
-
-
-                {itinerary.baggage && <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
-                    <h3 className="font-bold text-slate-700 mb-3">Detalhes da Bagagem</h3>
-                    <ul className="space-y-3">
-                        {[
-                            { icon: <BackpackIcon className="h-5 w-5 text-slate-500"/>, label: 'Item Pessoal (Mochila/Bolsa)', data: itinerary.baggage.personal },
-                            { icon: <SuitcaseIcon className="h-5 w-5 text-slate-500"/>, label: 'Bagagem de Mão (Até 10kg)', data: itinerary.baggage.carryOn },
-                            { icon: <BaggageIcon className="h-5 w-5 text-slate-500"/>, label: 'Bagagem Despachada (23kg)', data: itinerary.baggage.checked },
-                        ].map(item => (
-                             <li key={item.label} className="flex items-start gap-4">
-                                {item.icon}
-                                <div className="flex-grow">
-                                    <div className="flex justify-between items-center">
-                                        <p className="font-semibold text-slate-800">{item.label}</p>
-                                        <span className={`px-2 py-0.5 text-xs font-semibold rounded-full ${item.data.status === 'Inclusa' ? 'bg-green-100 text-green-800' : 'bg-amber-100 text-amber-800'}`}>{item.data.status}</span>
-                                    </div>
-                                    <p className="text-sm text-slate-600">{item.data.details}</p>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </div>}
-
-                <p className="text-xs text-slate-400 mt-6 text-center">
-                    As políticas de bagagem e os custos são estimativas. Sempre confirme as regras e valores no site da companhia aérea antes de comprar e voar.
-                </p>
             </div>
-        </div>
-    );
-};
-
-
-const Dashboard: React.FC = () => {
-    const [itineraries, setItineraries] = useState<Itinerary[]>(initialItineraries);
-    // FIX: Added state to manage the API key selection flow.
-    const [keyCheckStatus, setKeyCheckStatus] = useState<'checking' | 'ready' | 'needed'>('checking');
-
-    useEffect(() => {
-        const checkKey = async () => {
-            // The `window.aistudio` object is used to interact with the host environment for API key management.
-            if (window.aistudio && await window.aistudio.hasSelectedApiKey()) {
-                setKeyCheckStatus('ready');
-            } else {
-                setKeyCheckStatus('needed');
-            }
-        };
-        checkKey();
-    }, []);
-
-    const handleSelectKey = async () => {
-        if (window.aistudio) {
-            await window.aistudio.openSelectKey();
-            // Assume success to provide immediate feedback and avoid race conditions.
-            // If the key is invalid, the subsequent API call will fail and reset the state.
-            setKeyCheckStatus('ready');
-        }
-    };
-
-    const handleApiKeyError = () => {
-        // This function is called by child components if an API call fails due to a key issue.
-        setKeyCheckStatus('needed');
-    };
-
-    const handleNewItinerary = (newItineraryData: Omit<Itinerary, 'id' | 'savedDate'>) => {
-        const newItinerary: Itinerary = {
-            ...newItineraryData,
-            id: Date.now(),
-            savedDate: new Date().toLocaleDateString('pt-BR', { year: 'numeric', month: '2-digit', day: '2-digit' }),
-            monitoring: { enabled: true },
-        };
-        setItineraries(prev => [newItinerary, ...prev]);
-    };
-
-    if (keyCheckStatus === 'checking') {
-        return (
-            <div className="min-h-screen bg-slate-100 flex items-center justify-center">
-                <p className="text-slate-500 animate-pulse">Verificando configuração da API...</p>
-            </div>
-        );
-    }
-
-    if (keyCheckStatus === 'needed') {
-        return (
-            <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
-                <div className="max-w-md w-full p-8 bg-white rounded-xl shadow-lg text-center">
-                    <h1 className="text-2xl font-bold text-slate-800">Selecione uma Chave de API</h1>
-                    <p className="mt-4 text-slate-600">
-                        Para usar este aplicativo, você precisa selecionar uma chave de API do Google AI Studio para habilitar as chamadas para o modelo Gemini.
-                    </p>
-                    <button
-                        onClick={handleSelectKey}
-                        className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300"
-                    >
-                        Selecionar Chave de API
-                    </button>
-                    <p className="text-xs text-slate-500 mt-4">
-                        Isso abrirá uma caixa de diálogo para selecionar uma chave de API do seu projeto. Para informações sobre cobrança, consulte a <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">documentação de cobrança</a>.
-                    </p>
+            <div className="bg-slate-50 px-5 py-3 flex justify-between items-center text-sm">
+                <a
+                    href={itinerary.events[0]?.company.name === 'LATAM' ? generateLatamSearchUrl(itinerary.events[0]) : itinerary.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-600 hover:text-blue-800 font-semibold inline-flex items-center"
+                >
+                    <ExternalLinkIcon className="h-4 w-4 mr-1.5" />
+                    Ver Oferta Original
+                </a>
+                <div className={`px-2 py-1 rounded-full text-xs font-semibold ${itinerary.monitoring?.enabled ? 'bg-green-100 text-green-800' : 'bg-slate-200 text-slate-600'}`}>
+                    {itinerary.monitoring?.enabled ? 'Monitorando' : 'Não monitorado'}
                 </div>
             </div>
-        );
-    }
-
-    return (
-        <div className="min-h-screen bg-slate-100">
-            <div className="max-w-4xl mx-auto px-4 py-8">
-                <header className="text-center mb-8">
-                    <h1 className="text-4xl font-extrabold text-slate-800">Diário de Bordo de Voos</h1>
-                    <p className="text-slate-500 mt-2">Seu catálogo pessoal de voos encontrados.</p>
-                </header>
-
-                <main>
-                    <ImageUploader onItineraryCreated={handleNewItinerary} onApiKeyError={handleApiKeyError} />
-                    {itineraries.map(itinerary => (
-                        <ItineraryCard key={itinerary.id} itinerary={itinerary} />
-                    ))}
-                </main>
-            </div>
         </div>
     );
+  };
+
+
+  return (
+    <main className="container mx-auto p-4 md:p-8">
+      <header className="text-center mb-10">
+        <h1 className="text-5xl font-extrabold text-slate-800">Diário de Bordo</h1>
+        <p className="text-slate-500 mt-2 text-lg">Seu catálogo pessoal e inteligente para organizar e monitorar voos.</p>
+      </header>
+
+      <ImageUploader onItineraryCreated={handleNewItinerary} onApiKeyError={handleApiKeyError} />
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {sortedItineraries.map(itinerary => (
+          <ItineraryCard key={itinerary.id} itinerary={itinerary} />
+        ))}
+      </div>
+    </main>
+  );
 };
 
 export default Dashboard;

@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
 
-// FIX: Defined the AIStudio interface and used it for window.aistudio to resolve the "Subsequent property declarations must have the same type" error. This ensures type consistency across global declarations.
-interface AIStudio {
-  hasSelectedApiKey: () => Promise<boolean>;
-  openSelectKey: () => Promise<void>;
-}
-
+// FIX: Moved the AIStudio interface into the `declare global` block. This resolves the "Subsequent property declarations must have the same type" error by ensuring AIStudio is a true global type, preventing scope conflicts.
 declare global {
+  interface AIStudio {
+    hasSelectedApiKey: () => Promise<boolean>;
+    openSelectKey: () => Promise<void>;
+  }
+
   interface Window {
     aistudio?: AIStudio;
   }
