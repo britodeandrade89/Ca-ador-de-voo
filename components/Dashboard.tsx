@@ -11,6 +11,210 @@ import {
 import ImageUploader from './ImageUploader';
 
 const initialItineraries: Itinerary[] = [
+  // VOOS DE IDA GRU -> BOG (JAN 2026) - Adicionados a partir dos prints com cotação de R$26/milheiro
+  {
+    id: 18,
+    title: 'Ida GRU -> BOG (14/Jan)',
+    subtitle: '52.160 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1496,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '04:00', endTime: '19:10', startDate: '14 de jan', endDate: '14 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '17h 10m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Brasil | LATAM Airlines Colombia' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 17,
+    title: 'Ida GRU -> BOG (13/Jan)',
+    subtitle: '52.160 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1496,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '01:50', endTime: '19:10', startDate: '13 de jan', endDate: '13 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '19h 20m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group, Vamos Air | LATAM Airlines Colombia' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 16,
+    title: 'Ida GRU -> BOG (12/Jan - Direto)',
+    subtitle: '54.591 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1560,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '23:55', endTime: '04:10', startDate: '12 de jan', endDate: '13 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 15m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 15,
+    title: 'Ida GRU -> BOG (11/Jan)',
+    subtitle: '57.395 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1633,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '01:50', endTime: '16:15', startDate: '11 de jan', endDate: '11 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '16h 25m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Group | LATAM Airlines Perú' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 14,
+    title: 'Ida GRU -> BOG (10/Jan - Direto)',
+    subtitle: '55.099 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1573,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '10 de jan', endDate: '10 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 13,
+    title: 'Ida GRU -> BOG (09/Jan - Direto)',
+    subtitle: '55.099 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1573,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '09 de jan', endDate: '09 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 12,
+    title: 'Ida GRU -> BOG (08/Jan)',
+    subtitle: '57.395 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1633,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '16:30', endTime: '03:15', startDate: '08 de jan', endDate: '09 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '12h 45m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Perú | LATAM Airlines Colombia' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 11,
+    title: 'Ida GRU -> BOG (07/Jan - Direto)',
+    subtitle: '57.395 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1633,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '07 de jan', endDate: '07 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 10,
+    title: 'Ida GRU -> BOG (01/Jan)',
+    subtitle: '52.160 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1496,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '07:35', endTime: '16:10', startDate: '01 de jan', endDate: '01 de jan', startLocation: 'GRU', endLocation: 'BOG', duration: '10h 35m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Brasil | LATAM Airlines Perú' },
+    ],
+    baggage: { personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' }, carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' }, checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' } },
+    monitoring: { enabled: true },
+  },
+  // VOOS DE IDA GRU -> BOG (DEZ 2025) - Adicionados a partir dos prints
+  {
+    id: 9,
+    title: 'Ida GRU -> BOG (31/Dez - Direto)',
+    subtitle: 'Preço: 57.395 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1633,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '08:15', endTime: '12:15', startDate: '31 de dez', endDate: '31 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 00m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+    ],
+    baggage: {
+      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
+      carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' },
+      checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' },
+    },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 8,
+    title: 'Ida GRU -> BOG (30/Dez)',
+    subtitle: 'Preço: 57.395 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1633,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '21:20', endTime: '12:05', startDate: '30 de dez', endDate: '31 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '16h 45m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group' },
+    ],
+    baggage: {
+      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
+      carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' },
+      checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' },
+    },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 7,
+    title: 'Ida GRU -> BOG (29/Dez - Direto)',
+    subtitle: 'Preço: 60.013 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1701,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '23:55', endTime: '04:10', startDate: '29 de dez', endDate: '30 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '6h 15m', details: 'Direto', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Airlines Colombia' },
+    ],
+    baggage: {
+      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
+      carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' },
+      checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' },
+    },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 6,
+    title: 'Ida GRU -> BOG (24/Dez)',
+    subtitle: 'Preço: 60.378 milhas + R$ 191,82 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1762,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '07:55', endTime: '20:50', startDate: '24 de dez', endDate: '24 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '14h 55m', details: '2 paradas', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM / Vamos Air' },
+    ],
+    baggage: {
+      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
+      carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' },
+      checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' },
+    },
+    monitoring: { enabled: true },
+  },
+  {
+    id: 5,
+    title: 'Ida GRU -> BOG (23/Dez)',
+    subtitle: 'Preço: 60.378 milhas + R$ 140,30 (Milheiro a R$26)',
+    savedDate: '2024-07-28',
+    totalPrice: 1710,
+    sourceUrl: 'https://www.latamairlines.com/br/pt/oferta-voos',
+    events: [
+       { type: 'flight', startTime: '19:45', endTime: '12:05', startDate: '23 de dez', endDate: '24 de dez', startLocation: 'GRU', endLocation: 'BOG', duration: '18h 20m', details: '1 parada', company: { name: 'LATAM', logo: <LatamLogoIcon className="h-6 w-6" /> }, operator: 'LATAM Group' },
+    ],
+    baggage: {
+      personal: { status: 'Inclusa', details: '1 item (mochila ou bolsa). A confirmar.' },
+      carryOn: { status: 'Inclusa', details: '1 bagagem de mão de até 10kg. A confirmar.' },
+      checked: { status: 'Taxa Adicional', details: 'Não inclusa. Custo a confirmar com a cia.' },
+    },
+    monitoring: { enabled: true },
+  },
   // OPÇÃO 1
   {
     id: 1,
@@ -101,6 +305,7 @@ const getCompanyLogo = (companyName: string) => {
     if (lowerCaseName.includes('latam')) return <LatamLogoIcon className="h-6 w-6" />;
     if (lowerCaseName.includes('sky')) return <SkyLogoIcon className="h-6 w-6" />;
     if (lowerCaseName.includes('boa') || lowerCaseName.includes('boliviana')) return <BoaLogoIcon className="h-6 w-6" />;
+    if (lowerCaseName.includes('booking')) return <BedIcon className="h-6 w-6 text-indigo-600"/>;
     // Default logo
     return <MapPinIcon className="h-6 w-6 text-slate-500" />;
 };
@@ -159,7 +364,7 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
 
                 <div className="mt-4 p-4 rounded-lg bg-slate-50 border border-slate-200">
                     <div className="flex justify-between items-center mb-4">
-                        <span className="text-md font-semibold text-slate-600">{itinerary.subtitle ? itinerary.subtitle : 'Preço Total'}</span>
+                        <span className="text-md font-semibold text-slate-600">{itinerary.subtitle ? 'Preço Estimado' : 'Preço Total'}</span>
                         <span className="text-3xl font-bold text-green-600">R$ {displayPrice.toLocaleString('pt-BR')}</span>
                     </div>
 
@@ -185,7 +390,6 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
                                     break;
                              }
                              
-                             // Dynamically assign logo if it's just a string from Gemini
                              const eventLogo = typeof event.company.logo === 'string'
                                 ? getCompanyLogo(event.company.logo)
                                 : event.company.logo;
@@ -255,7 +459,6 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
                      </div>
                  )}
                 
-                {/* Monitoramento */}
                 {itinerary.monitoring?.enabled && (
                     <div className="mt-4 p-4 rounded-lg bg-blue-50 border border-blue-200">
                         <div className="flex justify-between items-center mb-4">
@@ -314,6 +517,34 @@ const ItineraryCard: React.FC<{ itinerary: Itinerary }> = ({ itinerary }) => {
 
 const Dashboard: React.FC = () => {
     const [itineraries, setItineraries] = useState<Itinerary[]>(initialItineraries);
+    // FIX: Added state to manage the API key selection flow.
+    const [keyCheckStatus, setKeyCheckStatus] = useState<'checking' | 'ready' | 'needed'>('checking');
+
+    useEffect(() => {
+        const checkKey = async () => {
+            // The `window.aistudio` object is used to interact with the host environment for API key management.
+            if (window.aistudio && await window.aistudio.hasSelectedApiKey()) {
+                setKeyCheckStatus('ready');
+            } else {
+                setKeyCheckStatus('needed');
+            }
+        };
+        checkKey();
+    }, []);
+
+    const handleSelectKey = async () => {
+        if (window.aistudio) {
+            await window.aistudio.openSelectKey();
+            // Assume success to provide immediate feedback and avoid race conditions.
+            // If the key is invalid, the subsequent API call will fail and reset the state.
+            setKeyCheckStatus('ready');
+        }
+    };
+
+    const handleApiKeyError = () => {
+        // This function is called by child components if an API call fails due to a key issue.
+        setKeyCheckStatus('needed');
+    };
 
     const handleNewItinerary = (newItineraryData: Omit<Itinerary, 'id' | 'savedDate'>) => {
         const newItinerary: Itinerary = {
@@ -325,6 +556,36 @@ const Dashboard: React.FC = () => {
         setItineraries(prev => [newItinerary, ...prev]);
     };
 
+    if (keyCheckStatus === 'checking') {
+        return (
+            <div className="min-h-screen bg-slate-100 flex items-center justify-center">
+                <p className="text-slate-500 animate-pulse">Verificando configuração da API...</p>
+            </div>
+        );
+    }
+
+    if (keyCheckStatus === 'needed') {
+        return (
+            <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
+                <div className="max-w-md w-full p-8 bg-white rounded-xl shadow-lg text-center">
+                    <h1 className="text-2xl font-bold text-slate-800">Selecione uma Chave de API</h1>
+                    <p className="mt-4 text-slate-600">
+                        Para usar este aplicativo, você precisa selecionar uma chave de API do Google AI Studio para habilitar as chamadas para o modelo Gemini.
+                    </p>
+                    <button
+                        onClick={handleSelectKey}
+                        className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition-colors focus:outline-none focus:ring-4 focus:ring-blue-300"
+                    >
+                        Selecionar Chave de API
+                    </button>
+                    <p className="text-xs text-slate-500 mt-4">
+                        Isso abrirá uma caixa de diálogo para selecionar uma chave de API do seu projeto. Para informações sobre cobrança, consulte a <a href="https://ai.google.dev/gemini-api/docs/billing" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">documentação de cobrança</a>.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="min-h-screen bg-slate-100">
             <div className="max-w-4xl mx-auto px-4 py-8">
@@ -334,7 +595,7 @@ const Dashboard: React.FC = () => {
                 </header>
 
                 <main>
-                    <ImageUploader onItineraryCreated={handleNewItinerary} />
+                    <ImageUploader onItineraryCreated={handleNewItinerary} onApiKeyError={handleApiKeyError} />
                     {itineraries.map(itinerary => (
                         <ItineraryCard key={itinerary.id} itinerary={itinerary} />
                     ))}

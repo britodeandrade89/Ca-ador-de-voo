@@ -5,9 +5,10 @@ import { ActivityIcon, AlertTriangleIcon } from './icons';
 
 interface ImageUploaderProps {
   onItineraryCreated: (itinerary: Omit<Itinerary, 'id' | 'savedDate'>) => void;
+  onApiKeyError: () => void;
 }
 
-const ImageUploader: React.FC<ImageUploaderProps> = ({ onItineraryCreated }) => {
+const ImageUploader: React.FC<ImageUploaderProps> = ({ onItineraryCreated, onApiKeyError }) => {
   const [pastedImage, setPastedImage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -22,11 +23,16 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onItineraryCreated }) => 
       onItineraryCreated(itineraryData);
       setPastedImage(null); // Limpa a imagem após o sucesso
     } catch (err) {
+      // FIX: Check for the specific API key error and trigger the callback to reset the UI state.
+      if (err instanceof Error && err.message === 'API_KEY_NOT_FOUND') {
+        onApiKeyError();
+        return; // Stop further processing to avoid showing a generic error.
+      }
       setError(err instanceof Error ? err.message : 'Ocorreu um erro desconhecido.');
     } finally {
       setIsLoading(false);
     }
-  }, [onItineraryCreated]);
+  }, [onItineraryCreated, onApiKeyError]);
 
   const handlePaste = useCallback((event: ClipboardEvent) => {
     if (isLoading) return;
@@ -90,7 +96,7 @@ const ImageUploader: React.FC<ImageUploaderProps> = ({ onItineraryCreated }) => 
          </div>
       )}
 
-      {pastedImage && (
+      {pastedImage && !error && (
          <div className="mt-4">
              <p className="text-sm font-medium text-slate-600 mb-2">Pré-visualização:</p>
              <img 

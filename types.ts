@@ -1,5 +1,17 @@
 import { ReactNode } from 'react';
 
+// FIX: Defined the AIStudio interface and used it for window.aistudio to resolve the "Subsequent property declarations must have the same type" error. This ensures type consistency across global declarations.
+interface AIStudio {
+  hasSelectedApiKey: () => Promise<boolean>;
+  openSelectKey: () => Promise<void>;
+}
+
+declare global {
+  interface Window {
+    aistudio?: AIStudio;
+  }
+}
+
 // FIX: Added UserConfig interface to define the shape of user configuration data.
 export interface UserConfig {
   origins: string[];

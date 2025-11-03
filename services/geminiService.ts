@@ -1,8 +1,8 @@
 import { GoogleGenAI, Type } from "@google/genai";
-import type { UserConfig, Flight, Itinerary, TripEvent } from '../types';
+import type { UserConfig, Flight, Itinerary } from '../types';
 
-// FIX: Initialize the Gemini AI client using the API key from environment variables as per guidelines.
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// FIX: Removed the global AI instance. A new client is created on demand to ensure the latest API key is used.
+const getAiClient = () => new GoogleGenAI({ apiKey: process.env.API_KEY });
 
 const flightSchema = {
     type: Type.OBJECT,
@@ -21,6 +21,7 @@ const flightSchema = {
 };
 
 export const searchFlights = async (config: UserConfig): Promise<Flight[]> => {
+    const ai = getAiClient();
     const prompt = `
         Simule uma API de busca de voos. Gere uma lista de 15 resultados de voos fictícios com base na seguinte configuração de usuário.
         - Os preços devem ser em Reais (BRL).
@@ -45,16 +46,18 @@ export const searchFlights = async (config: UserConfig): Promise<Flight[]> => {
             },
         });
         
-        // FIX: Extract text response directly from response.text as per guidelines.
         const jsonText = response.text;
         const flights = JSON.parse(jsonText) as Flight[];
         
-        // Sort by price before returning
         return flights.sort((a, b) => a.price - b.price);
 
     } catch (error) {
         console.error("Erro ao buscar dados de voos da API Gemini:", error);
-        throw new Error("Falha ao buscar dados de voos. Verifique sua chave de API e conexão de rede.");
+        // FIX: Added specific error handling for API key issues as per guidelines.
+        if (error instanceof Error && error.message.includes('Requested entity was not found')) {
+            throw new Error("API_KEY_NOT_FOUND");
+        }
+        throw new Error("Falha ao buscar dados de voos. Verifique sua chave de API e tente novamente.");
     }
 };
 
@@ -130,6 +133,7 @@ const itinerarySchema = {
 
 
 export const analyzeTravelScreenshot = async (imageDataBase64: string): Promise<Omit<Itinerary, 'id' | 'savedDate'>> => {
+    const ai = getAiClient();
     const prompt = `
         Analise esta captura de tela de uma reserva de viagem. A imagem contém detalhes de um itinerário e uma barra de endereço do navegador no topo.
         Sua primeira tarefa é identificar se a reserva é para um (1) Voo, (2) Estadia/Acomodação, ou (3) Ônibus.
@@ -185,6 +189,10 @@ export const analyzeTravelScreenshot = async (imageDataBase64: string): Promise<
 
     } catch (error) {
         console.error("Erro ao analisar a captura de tela com a API Gemini:", error);
+        // FIX: Added specific error handling for API key issues as per guidelines.
+        if (error instanceof Error && error.message.includes('Requested entity was not found')) {
+            throw new Error("API_KEY_NOT_FOUND");
+        }
         throw new Error("Não foi possível extrair os dados da imagem. Tente uma captura de tela mais nítida ou verifique o console para mais detalhes.");
     }
 };
