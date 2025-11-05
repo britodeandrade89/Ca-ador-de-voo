@@ -198,3 +198,63 @@ export const ShipIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
         <path strokeLinecap="round" strokeLinejoin="round" d="M3 12.75h18" />
     </svg>
 );
+
+export const CloseIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+    </svg>
+);
+
+export const ChevronLeftIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+    </svg>
+);
+
+export const ChevronRightIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+);
+
+
+// START: Theme icons for Destination Cards
+export const TangoDancersIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M12 2a1 1 0 0 1 1 1v2.5a1 1 0 0 1-2 0V3a1 1 0 0 1 1-1Zm-3.5 3.5a1 1 0 0 0-1 1V9a1 1 0 1 0 2 0V6.5a1 1 0 0 0-1-1Zm7 0a1 1 0 0 0-1 1V9a1 1 0 1 0 2 0V6.5a1 1 0 0 0-1-1ZM5 10a1 1 0 0 0-1 1v2.5a1 1 0 1 0 2 0V11a1 1 0 0 0-1-1Zm14 0a1 1 0 0 0-1 1v2.5a1 1 0 1 0 2 0V11a1 1 0 0 0-1-1Zm-8.5 1a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM8 15.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm8 0a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0ZM12 18a1 1 0 0 1-1-1v-2.5a1 1 0 1 1 2 0V17a1 1 0 0 1-1 1Zm-3.5 1.5a1 1 0 0 0-1 1v.5a1 1 0 1 0 2 0v-.5a1 1 0 0 0-1-1Zm7 0a1 1 0 0 0-1 1v.5a1 1 0 1 0 2 0v-.5a1 1 0 0 0-1-1Z" />
+    </svg>
+);
+export const MountainPeakIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path fillRule="evenodd" d="M11.47 2.47a.75.75 0 0 1 1.06 0l7.5 7.5a.75.75 0 1 1-1.06 1.06l-6.22-6.22-2.47 2.47a.75.75 0 0 1-1.06 0l-3.5-3.5a.75.75 0 0 1 1.06-1.06l2.72 2.72 6.22-6.22ZM13.81 11.25a.75.75 0 0 1 0 1.06l-4.5 4.5a.75.75 0 0 1-1.06 0l-1.5-1.5a.75.75 0 0 1 1.06-1.06l.72.72 3.72-3.72a.75.75 0 0 1 1.06 0ZM3.25 19.5a.75.75 0 0 1 0-1.5h17.5a.75.75 0 0 1 0 1.5H3.25Z" clipRule="evenodd" />
+    </svg>
+);
+export const WineGlassIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M12.75 2.25a.75.75 0 0 0-1.5 0v.546c-.57.121-1.12.336-1.637.633a1.5 1.5 0 0 0-.525 2.126 10.493 10.493 0 0 1 4.324 0 1.5 1.5 0 0 0-.525-2.126 5.86 5.86 0 0 0-1.637-.633V2.25ZM10.5 12a.75.75 0 0 0 0 1.5h3a.75.75 0 0 0 0-1.5h-3Z" />
+        <path fillRule="evenodd" d="M12 1.5a.75.75 0 0 0-.75.75v.553c-1.313.332-2.52.92-3.518 1.666a3 3 0 0 0-1.05 4.25 11.99 11.99 0 0 0 10.636 0 3 3 0 0 0-1.05-4.25A11.363 11.363 0 0 0 12.75 2.803V2.25A.75.75 0 0 0 12 1.5ZM9 12a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0v-5Zm3-1.5a.75.75 0 0 0-1.5 0v6a.75.75 0 0 0 1.5 0v-6ZM9.75 18.75a.75.75 0 0 0 0 1.5h4.5a.75.75 0 0 0 0-1.5h-4.5Z" clipRule="evenodd" />
+    </svg>
+);
+export const CompassSouthIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path fillRule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm-.53 14.03a.75.75 0 0 0 1.06 0l3-3a.75.75 0 1 0-1.06-1.06l-1.72 1.72V8.25a.75.75 0 0 0-1.5 0v5.69l-1.72-1.72a.75.75 0 0 0-1.06 1.06l3 3Z" clipRule="evenodd" />
+    </svg>
+);
+export const RiverIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M4.5 12.001a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm-12 5.001a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm-12-10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z" />
+        <path fillRule="evenodd" d="M2.5 5.001a2.5 2.5 0 0 0-2.5 2.5v9a2.5 2.5 0 0 0 2.5 2.5h19a2.5 2.5 0 0 0 2.5-2.5v-9a2.5 2.5 0 0 0-2.5-2.5h-19Zm-2.5 2.5a.5.5 0 0 1 .5-.5h19a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-19a.5.5 0 0 1-.5-.5v-9Z" clipRule="evenodd" />
+    </svg>
+);
+export const SouthAmericaIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path fillRule="evenodd" d="M12.54 2.22a.75.75 0 0 0-1.08 0l-6.25 6.25a.75.75 0 0 0 0 1.06l1.22 1.22a.75.75 0 0 0 1.06 0l1.22-1.22 2.72 2.72a.75.75 0 0 0 1.06 0l2.72-2.72 1.22 1.22a.75.75 0 0 0 1.06 0l1.22-1.22a.75.75 0 0 0 0-1.06l-6.25-6.25Zm2.72 8.53-1.22 1.22-2.22-2.22-2.22 2.22-1.22-1.22 3.75-3.75 3.16 3.16ZM11.25 18.75a.75.75 0 0 0-1.5 0v.19l-1.37.19a.75.75 0 0 0-.63.75c0 .41.34.75.75.75h.38c-.01.02-.02.04-.02.06v.25a.75.75 0 0 0 1.5 0v-.19l1.37-.19a.75.75 0 0 0 .63-.75c0-.41-.34-.75-.75-.75h-.38c.01-.02.02-.04.02-.06v-.25ZM9.75 15a.75.75 0 0 0-1.5 0v.19l-1.37.19a.75.75 0 0 0-.63.75c0 .41.34.75.75.75h.38c-.01.02-.02.04-.02.06v.25a.75.75 0 0 0 1.5 0v-.19l1.37-.19a.75.75 0 0 0 .63-.75c0-.41-.34-.75-.75-.75h-.38c.01-.02.02-.04.02-.06v-.25ZM12.75 15a.75.75 0 0 0-1.5 0v.19l-1.37.19a.75.75 0 0 0-.63.75c0 .41.34.75.75.75h.38c-.01.02-.02.04-.02.06v.25a.75.75 0 0 0 1.5 0v-.19l1.37-.19a.75.75 0 0 0 .63-.75c0-.41-.34-.75-.75-.75h-.38c.01-.02.02-.04.02-.06v-.25Z" clipRule="evenodd" />
+    </svg>
+);
+export const MontevideoGateIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M18 6a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V6Zm-5 0a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V6Z" />
+        <path fillRule="evenodd" d="M4 4a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v13.5a.75.75 0 0 1-1.5 0V6a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0-.5.5v11.5a.75.75 0 0 1-1.5 0V4Zm1.5 16a.75.75 0 0 1 .75-.75h11.5a.75.75 0 0 1 0 1.5H6.25a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+    </svg>
+);
+// END: Theme icons for Destination Cards

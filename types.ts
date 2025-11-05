@@ -1,4 +1,5 @@
-import { ReactNode } from 'react';
+// FIX: Imported the `React` namespace to resolve the "Cannot find namespace 'React'" error for the `React.ReactElement` type.
+import React, { ReactNode } from 'react';
 
 // FIX: Moved the AIStudio interface into the `declare global` block. This resolves the "Subsequent property declarations must have the same type" error by ensuring AIStudio is a true global type, preventing scope conflicts.
 declare global {
@@ -107,4 +108,27 @@ export interface Destination {
   category: string;
   places: string[];
   description: string;
+  themeColor: string;
+  icon: React.ReactElement;
 }
+
+// START: Added interfaces for detailed day-by-day itineraries
+export interface DayPlan {
+  day: number;
+  date: string;
+  title: string;
+  activities: string[];
+}
+
+export interface CityItinerary {
+  city: string;
+  duration: string;
+  days: DayPlan[];
+}
+
+export interface DetailedRoute {
+  id: number;
+  title: string;
+  itinerary: CityItinerary[];
+}
+// END: Added interfaces for detailed day-by-day itineraries
