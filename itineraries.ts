@@ -74,7 +74,7 @@ export const initialItineraries: Itinerary[] = [
   },
   {
     id: 4,
-    title: 'Ônibus Águia Branca: Rio → São Paulo',
+    title: 'Ônibus Águia Branca: Rio de Janeiro → São Paulo',
     savedDate: '2024-07-25',
     totalPrice: 149.90,
     sourceUrl: '#',
