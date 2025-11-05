@@ -100,3 +100,11 @@ export interface Itinerary {
     enabled: boolean;
   };
 }
+
+export interface Destination {
+  id: number;
+  title: string;
+  category: string;
+  places: string[];
+  description: string;
+}
