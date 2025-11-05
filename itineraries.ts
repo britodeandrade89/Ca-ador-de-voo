@@ -66,8 +66,8 @@ export const initialItineraries: Itinerary[] = [
     events: [
       {
         type: 'bus',
-        startTime: '11:00', endTime: '03:50', startDate: '02/01', endDate: '03/01',
-        startLocation: 'São Paulo (Barra Funda)', endLocation: 'Foz do Iguaçu', duration: '16h 50m', details: 'Leito',
+        startTime: '13:00', endTime: '05:15', startDate: '13/01', endDate: '14/01',
+        startLocation: 'São Paulo (Barra Funda)', endLocation: 'Foz do Iguaçu', duration: '16h 15m', details: 'Leito',
         company: { name: 'Brasil Sul', logo: React.createElement(BrasilSulLogoIcon, { className: "h-8 w-auto" }) },
       }
     ],
@@ -81,7 +81,7 @@ export const initialItineraries: Itinerary[] = [
     events: [
       {
         type: 'bus',
-        startTime: '00:20', endTime: '07:20', startDate: '02/01', endDate: '02/01',
+        startTime: '00:20', endTime: '07:20', startDate: '13/01', endDate: '13/01',
         startLocation: 'Rio de Janeiro (Novo Rio)', endLocation: 'São Paulo (Barra Funda)', duration: '7h', details: 'Leito',
         company: { name: 'Águia Branca', logo: React.createElement(AguiaBrancaLogoIcon, { className: "h-8 w-auto" }) },
       }
