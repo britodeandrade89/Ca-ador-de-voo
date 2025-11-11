@@ -87,6 +87,14 @@ export interface PriceHistoryItem {
   price: number;
 }
 
+export interface BookingOption {
+    provider: string;
+    price: number;
+    url: string;
+    logo?: ReactNode;
+    tag?: string;
+}
+
 export interface Itinerary {
   id: number;
   title: string;
@@ -96,6 +104,7 @@ export interface Itinerary {
   events: TripEvent[];
   baggage?: BaggageInfo;
   additionalCosts?: AdditionalCost[];
+  bookingOptions?: BookingOption[];
   sourceUrl: string;
   monitoring?: {
     enabled: boolean;
@@ -115,7 +124,7 @@ export interface Destination {
 // START: Added interfaces for detailed day-by-day itineraries
 export interface DayPlan {
   day: number;
-  date: string;
+  date?: string;
   title: string;
   activities: string[];
 }
@@ -126,9 +135,24 @@ export interface CityItinerary {
   days: DayPlan[];
 }
 
+export interface AccommodationOption {
+    name: string;
+    rating: number;
+    pricePerNight: number;
+    totalPrice: number;
+    nights: number;
+    images: string[];
+    amenities: string[];
+    pros: string[];
+    cons: string[];
+    distanceToCenter: string;
+    bookingUrl: string;
+}
+
 export interface DetailedRoute {
   id: number;
   title: string;
   itinerary: CityItinerary[];
+  accommodations?: AccommodationOption[];
 }
 // END: Added interfaces for detailed day-by-day itineraries

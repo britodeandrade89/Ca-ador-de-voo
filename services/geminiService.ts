@@ -196,3 +196,29 @@ export const analyzeTravelScreenshot = async (imageDataBase64: string): Promise<
         throw new Error("Não foi possível extrair os dados da imagem. Tente uma captura de tela mais nítida ou verifique o console para mais detalhes.");
     }
 };
+
+export const getAiTravelAssistantResponse = async (prompt: string): Promise<string> => {
+    const ai = getAiClient();
+    
+    try {
+        const response = await ai.models.generateContent({
+            model: "gemini-2.5-flash",
+            contents: prompt,
+             config: {
+                systemInstruction: `Você é o "Diário de Bordo IA", um assistente de viagens especialista. Sua missão é fornecer respostas úteis, criativas e bem formatadas para ajudar os usuários a planejarem suas viagens dos sonhos.
+- Responda em português do Brasil.
+- Use Markdown para formatar suas respostas (listas, negrito, etc.) para melhor legibilidade.
+- Seja amigável e informativo.
+- Quando perguntado sobre preços, sempre deixe claro que são estimativas e podem variar.
+- Quando sugerir roteiros, organize-os por dia.`,
+            },
+        });
+        return response.text;
+    } catch (error) {
+        console.error("Erro ao contatar o assistente de IA Gemini:", error);
+        if (error instanceof Error && error.message.includes('Requested entity was not found')) {
+            throw new Error("API_KEY_NOT_FOUND");
+        }
+        throw new Error("Não foi possível obter uma resposta do assistente. Verifique sua chave de API e tente novamente.");
+    }
+};

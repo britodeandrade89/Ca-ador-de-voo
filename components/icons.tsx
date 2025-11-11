@@ -61,6 +61,35 @@ export const AguiaBrancaLogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (pro
   </svg>
 );
 
+export const MaxMilhasLogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg width="48" height="48" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg" {...props}>
+      <rect width="100" height="50" rx="10" fill="#2E8B57"/>
+      <text x="50" y="35" fontFamily="Arial, sans-serif" fontSize="24" fill="white" textAnchor="middle" fontWeight="bold">max</text>
+    </svg>
+);
+
+export const AzulLogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg width="48" height="48" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <path d="M49.9998 8.33301C38.8358 8.33301 28.1814 13.033 20.4184 20.796C12.6554 28.559 7.9554 39.2134 7.9554 50.3774C7.9554 61.5414 12.6554 72.1958 20.4184 79.9588C28.1814 87.7218 38.8358 92.4218 49.9998 92.4218C61.1638 92.4218 71.8182 87.7218 79.5812 79.9588C87.3442 72.1958 92.0442 61.5414 92.0442 50.3774C92.0442 39.2134 87.3442 28.559 79.5812 20.796C71.8182 13.033 61.1638 8.33301 49.9998 8.33301Z" fill="#001E64"/>
+        <path d="M29.1667 50.377L33.3334 46.2103L50.0001 62.877L66.6667 46.2103L70.8334 50.377L50.0001 71.2103L29.1667 50.377Z" fill="#00AEEF"/>
+        <path d="M50.0001 29.5439L33.3334 46.2106L37.5001 50.3773L50.0001 37.8773L62.5001 50.3773L66.6667 46.2106L50.0001 29.5439Z" fill="white"/>
+    </svg>
+);
+
+export const DecolarLogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <rect width="48" height="48" rx="8" fill="#F43F5E"/>
+        <path d="M24 12C17.37 12 12 17.37 12 24C12 30.63 17.37 36 24 36C27.13 36 29.98 34.89 32.09 33.09C30.29 30.98 29.18 28.13 29.18 25.1C29.18 20.53 32.89 16.82 37.46 16.82C35.13 13.91 30.09 12 24 12Z" fill="white"/>
+    </svg>
+);
+
+export const BookingLogoIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
+        <rect width="48" height="48" rx="8" fill="#003580"/>
+        <path d="M21 14H24.5C27.5 14 30 16.5 30 19.5C30 22.5 27.5 25 24.5 25H21V14ZM21 27H25C28.5 27 31 29.5 31 32.5C31 35.5 28.5 38 25 38H21V27Z" fill="white" stroke="#FFFFFF" strokeWidth="2"/>
+    </svg>
+);
+
 
 export const ExternalLinkIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
@@ -173,7 +202,7 @@ export const PlaneTakeoffIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props)
 
 export const CogIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.962a8.25 8.25 0 0 1 5.56 5.56c.046.55-.422 1.02-.962 1.11l-1.542.31a1.125 1.125 0 0 1-1.341-1.341l.31-1.542c.09-.542-.26-1.007-.81-1.062a3.75 3.75 0 0 0-4.11-4.11c-.055-.55-.52-1.02-.962-.962l-.465.093a1.125 1.125 0 0 1-1.341-1.341l.093-.465Zm-1.85 1.85.465-.093a1.125 1.125 0 0 1 1.341 1.341l-.093.465c-.055.55-.52 1.02-.962.962a3.75 3.75 0 0 0-4.11 4.11c.055.55.52 1.02.962.962l.465-.093a1.125 1.125 0 0 1 1.341 1.341l-.093.465c-.09.542-.56 1.007-1.11.962a8.25 8.25 0 0 1-5.56-5.56c-.046-.55.422-1.02.962-1.11l1.542-.31a1.125 1.125 0 0 1 1.341 1.341l-.31 1.542c-.09.542.26 1.007.81 1.062a3.75 3.75 0 0 0 4.11-4.11c.055-.55.52-1.02.962-.962l-.465.093a1.125 1.125 0 0 1-1.341-1.341l.093-.465Z" />
+      <path strokeLinecap="round" strokeLinejoin="round" d="M9.594 3.94c.09-.542.56-1.007 1.11-.962a8.25 8.25 0 0 1 5.56 5.56c.046.55-.422 1.02-.962 1.11l-1.542.31a1.125 1.125 0 0 1-1.341-1.341l.31-1.542c.09-.542-.26-1.007-.81-1.062a3.75 3.75 0 0 0-4.11-4.11c-.055-.55-.52-1.02-.962-.962l-.465.093a1.125 1.125 0 0 1-1.341-1.341l.093-.465Zm-1.85 1.85.465-.093a1.125 1.125 0 0 1 1.341 1.341l-.093.465c-.055.55-.52 1.02-.962.962a3.75 3.75 0 0 0-4.11 4.11c.055.55.52 1.02.962.962l.465-.093a1.125 1.125 0 0 1 1.341 1.341l-.093.465c-.09.542-.56 1.007-1.11-.962a8.25 8.25 0 0 1-5.56-5.56c-.046-.55.422-1.02.962-1.11l1.542-.31a1.125 1.125 0 0 1 1.341 1.341l-.31 1.542c-.09.542.26 1.007.81 1.062a3.75 3.75 0 0 0 4.11-4.11c.055-.55.52-1.02.962-.962l-.465.093a1.125 1.125 0 0 1-1.341-1.341l.093-.465Z" />
       <path strokeLinecap="round" strokeLinejoin="round" d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
     </svg>
 );
@@ -189,6 +218,12 @@ export const BookOpenIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25" />
     </svg>
+);
+
+export const SparklesIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
+  </svg>
 );
 
 export const ShipIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
@@ -214,6 +249,32 @@ export const ChevronLeftIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) 
 export const ChevronRightIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
         <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+    </svg>
+);
+
+export const StarIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.118 3.557 1.176 5.375c.289 1.32.956 1.838 2.126.878L12 17.75l-4.755 2.98c-1.17.96-1.837.442-1.548-.878l1.176-5.375-4.118-3.557c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.006Z" clipRule="evenodd" />
+    </svg>
+);
+
+export const ThumbsUpIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M7.493 18.75c-.425 0-.82-.236-.975-.632A7.48 7.48 0 0 1 6 15.375c0-1.75.5-3.375 1.375-4.625.386-.54.956-.875 1.625-.875h3.375c.669 0 1.239.335 1.625.875 1.5 2.25 1.5 5.25 0 7.5-.386.54-.956.875-1.625.875h-4.375Z" />
+        <path d="M14.25 18.75h1.5c.621 0 1.125-.504 1.125-1.125v-6.75c0-.621-.504-1.125-1.125-1.125h-1.5V18.75Z" />
+    </svg>
+);
+
+export const ThumbsDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M7.493 5.25c-.425 0-.82.236-.975.632A7.48 7.48 0 0 0 6 8.625c0 1.75.5 3.375 1.375 4.625.386.54.956.875 1.625.875h3.375c.669 0 1.239-.335 1.625-.875 1.5-2.25 1.5-5.25 0-7.5-.386-.54-.956-.875-1.625-.875h-4.375Z" />
+        <path d="M14.25 5.25h1.5c.621 0 1.125.504 1.125 1.125v6.75c0 .621-.504 1.125-1.125 1.125h-1.5V5.25Z" />
+    </svg>
+);
+
+export const WifiIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path fillRule="evenodd" d="M1.323 11.183a.75.75 0 0 1 1.06 0 13.438 13.438 0 0 1 19.234 0 .75.75 0 1 1-1.06 1.06A11.938 11.938 0 0 0 2.383 12.243a.75.75 0 0 1 0-1.06Zm3.182 3.182a.75.75 0 0 1 1.06 0 9.438 9.438 0 0 1 13.434 0 .75.75 0 1 1-1.06 1.06A7.938 7.938 0 0 0 5.565 15.425a.75.75 0 0 1 0-1.06Zm3.182 3.182a.75.75 0 0 1 1.06 0 5.437 5.437 0 0 1 7.214 0 .75.75 0 1 1-1.06 1.06A3.937 3.937 0 0 0 8.747 19.667a.75.75 0 0 1 0-1.06Zm3.53-1.62a.75.75 0 0 1 1.06 0 1.938 1.938 0 0 1 0 2.12.75.75 0 1 1-1.06-1.06c.018-.018.018-.046 0-.064a1.934 1.934 0 0 1 0-2.12c.018-.018.018-.046 0-.064Z" clipRule="evenodd" />
     </svg>
 );
 
@@ -255,6 +316,12 @@ export const MontevideoGateIcon: React.FC<React.SVGProps<SVGSVGElement>> = (prop
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
         <path d="M18 6a2 2 0 0 0-2-2h-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V6Zm-5 0a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2V6Z" />
         <path fillRule="evenodd" d="M4 4a3 3 0 0 1 3-3h10a3 3 0 0 1 3 3v13.5a.75.75 0 0 1-1.5 0V6a.5.5 0 0 0-.5-.5H6a.5.5 0 0 0-.5.5v11.5a.75.75 0 0 1-1.5 0V4Zm1.5 16a.75.75 0 0 1 .75-.75h11.5a.75.75 0 0 1 0 1.5H6.25a.75.75 0 0 1-.75-.75Z" clipRule="evenodd" />
+    </svg>
+);
+
+export const SunIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" {...props}>
+        <path d="M12 2.25a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 9 0 4.5 4.5 0 0 1-9 0ZM18.899 6.101a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59ZM21.75 12a.75.75 0 0 1-.75.75h-2.25a.75.75 0 0 1 0-1.5h2.25a.75.75 0 0 1 .75.75ZM17.838 17.838a.75.75 0 0 0-1.06-1.06l-1.59 1.591a.75.75 0 1 0 1.06 1.06l1.59-1.591ZM12 18a.75.75 0 0 1 .75.75v2.25a.75.75 0 0 1-1.5 0v-2.25A.75.75 0 0 1 12 18ZM7.758 17.838a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 0 0 1.06 1.061l1.591-1.59ZM6 12a.75.75 0 0 1-.75.75H3a.75.75 0 0 1 0-1.5h2.25A.75.75 0 0 1 6 12ZM6.101 6.101a.75.75 0 0 0-1.06-1.06l-1.591 1.59a.75.75 0 1 0 1.06 1.061l1.591-1.59Z" />
     </svg>
 );
 // END: Theme icons for Destination Cards

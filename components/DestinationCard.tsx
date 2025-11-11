@@ -6,10 +6,11 @@ interface DestinationCardProps {
   destination: Destination;
   totalCost: number;
   costBreakdown: { leg: string; price: number | null; note?: string }[];
+  duration: string;
   onClick: () => void;
 }
 
-const DestinationCard: React.FC<DestinationCardProps> = ({ destination, totalCost, costBreakdown, onClick }) => {
+const DestinationCard: React.FC<DestinationCardProps> = ({ destination, totalCost, costBreakdown, duration, onClick }) => {
   const { themeColor, icon } = destination;
 
   return (
@@ -26,7 +27,10 @@ const DestinationCard: React.FC<DestinationCardProps> = ({ destination, totalCos
         <div className="absolute top-2 right-2 text-white/20 transform-gpu group-hover:scale-110 transition-transform duration-300">
           {React.cloneElement(icon, { className: 'h-24 w-24' })}
         </div>
-        <h3 className="text-xl font-bold relative z-10">{destination.title}</h3>
+        <h3 className="text-xl font-bold relative z-10 flex items-baseline">
+          <span>{destination.title}</span>
+          {duration && <span className="text-base font-normal text-white/80 ml-2 whitespace-nowrap">{duration}</span>}
+        </h3>
         <p className="text-sm text-white/90 relative z-10 mt-1 h-10">{destination.description}</p>
       </div>
 

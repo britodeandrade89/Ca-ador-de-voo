@@ -2,34 +2,42 @@ import React, { useState } from 'react';
 import type { Itinerary } from '../types';
 import Destinations from './Destinations';
 import ItineraryCard from './ItineraryCard';
-import { CompassIcon, BookOpenIcon } from './icons';
+import ItineraryDetailsModal from './ItineraryDetailsModal';
+import AiAssistant from './AiAssistant';
+import { CompassIcon, BookOpenIcon, SparklesIcon } from './icons';
 import { initialItineraries } from '../itineraries';
 
 
 const Dashboard: React.FC = () => {
-    const [activeTab, setActiveTab] = useState<'itineraries' | 'destinations'>('itineraries');
+    const [activeTab, setActiveTab] = useState<'itineraries' | 'destinations' | 'ai-assistant'>('destinations');
     const [itineraries, setItineraries] = useState<Itinerary[]>(initialItineraries);
+    const [selectedItinerary, setSelectedItinerary] = useState<Itinerary | null>(null);
 
     const renderContent = () => {
-        if (activeTab === 'destinations') {
-            return <Destinations />;
+        switch (activeTab) {
+            case 'destinations':
+                return <Destinations />;
+            case 'ai-assistant':
+                return <AiAssistant />;
+            case 'itineraries':
+            default:
+                return (
+                    <div>
+                        <div className="text-center mb-12">
+                            <h2 className="text-4xl font-extrabold text-slate-800">Meus Itinerários</h2>
+                            <p className="text-slate-500 mt-2 text-lg">Aqui estão todas as suas passagens e planos de viagem salvos.</p>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        {itineraries.map(itinerary => (
+                            <ItineraryCard key={itinerary.id} itinerary={itinerary} onSelect={setSelectedItinerary} />
+                        ))}
+                        </div>
+                    </div>
+                );
         }
-        return (
-            <div>
-                 <div className="text-center mb-12">
-                    <h2 className="text-4xl font-extrabold text-slate-800">Meus Itinerários</h2>
-                    <p className="text-slate-500 mt-2 text-lg">Aqui estão todas as suas passagens e planos de viagem salvos.</p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                   {itineraries.map(itinerary => (
-                       <ItineraryCard key={itinerary.id} itinerary={itinerary} />
-                   ))}
-                </div>
-            </div>
-        );
     };
 
-    const TabButton: React.FC<{ tabName: 'itineraries' | 'destinations'; label: string; icon: React.ReactNode }> = ({ tabName, label, icon }) => (
+    const TabButton: React.FC<{ tabName: 'itineraries' | 'destinations' | 'ai-assistant'; label: string; icon: React.ReactNode }> = ({ tabName, label, icon }) => (
         <button
             onClick={() => setActiveTab(tabName)}
             className={`flex items-center space-x-2 px-4 py-2 rounded-md font-semibold transition-colors text-sm ${
@@ -51,14 +59,16 @@ const Dashboard: React.FC = () => {
                         Diário de Bordo
                     </h1>
                      <div className="flex items-center space-x-2 bg-slate-100 p-1 rounded-lg">
-                        <TabButton tabName="itineraries" label="Meus Itinerários" icon={<BookOpenIcon className="h-5 w-5" />} />
                         <TabButton tabName="destinations" label="Explorar Roteiros" icon={<CompassIcon className="h-5 w-5" />} />
+                        <TabButton tabName="itineraries" label="Meus Itinerários" icon={<BookOpenIcon className="h-5 w-5" />} />
+                        <TabButton tabName="ai-assistant" label="Assistente IA" icon={<SparklesIcon className="h-5 w-5" />} />
                     </div>
                 </nav>
             </header>
             <main className="container mx-auto p-4 sm:p-6 lg:p-8">
                {renderContent()}
             </main>
+            <ItineraryDetailsModal itinerary={selectedItinerary} onClose={() => setSelectedItinerary(null)} />
         </div>
     );
 };
