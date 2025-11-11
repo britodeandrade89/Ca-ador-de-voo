@@ -11,6 +11,17 @@ declare global {
   interface Window {
     aistudio?: AIStudio;
   }
+
+  // START: Added BeforeInstallPromptEvent interface for PWA installation
+  interface BeforeInstallPromptEvent extends Event {
+    readonly platforms: string[];
+    readonly userChoice: Promise<{
+      outcome: 'accepted' | 'dismissed';
+      platform: string;
+    }>;
+    prompt(): Promise<void>;
+  }
+  // END: Added BeforeInstallPromptEvent interface for PWA installation
 }
 
 // FIX: Added UserConfig interface to define the shape of user configuration data.

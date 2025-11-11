@@ -1,17 +1,37 @@
+
 import React, { useState } from 'react';
 import type { Itinerary } from '../types';
 import Destinations from './Destinations';
 import ItineraryCard from './ItineraryCard';
 import ItineraryDetailsModal from './ItineraryDetailsModal';
 import AiAssistant from './AiAssistant';
-import { CompassIcon, BookOpenIcon, SparklesIcon } from './icons';
+import { CompassIcon, BookOpenIcon, SparklesIcon, DownloadIcon } from './icons';
 import { initialItineraries } from '../itineraries';
 
+interface DashboardProps {
+  installPromptEvent: BeforeInstallPromptEvent | null;
+  onInstallSuccess: () => void;
+}
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<DashboardProps> = ({ installPromptEvent, onInstallSuccess }) => {
     const [activeTab, setActiveTab] = useState<'itineraries' | 'destinations' | 'ai-assistant'>('destinations');
     const [itineraries, setItineraries] = useState<Itinerary[]>(initialItineraries);
     const [selectedItinerary, setSelectedItinerary] = useState<Itinerary | null>(null);
+
+    const handleInstallClick = () => {
+        if (!installPromptEvent) {
+            return;
+        }
+        installPromptEvent.prompt();
+        installPromptEvent.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('Usuário aceitou a instalação');
+                onInstallSuccess();
+            } else {
+                console.log('Usuário recusou a instalação');
+            }
+        });
+    };
 
     const renderContent = () => {
         switch (activeTab) {
@@ -58,10 +78,21 @@ const Dashboard: React.FC = () => {
                     <h1 className="text-2xl font-bold text-slate-800">
                         Diário de Bordo
                     </h1>
-                     <div className="flex items-center space-x-2 bg-slate-100 p-1 rounded-lg">
-                        <TabButton tabName="destinations" label="Explorar Roteiros" icon={<CompassIcon className="h-5 w-5" />} />
-                        <TabButton tabName="itineraries" label="Meus Itinerários" icon={<BookOpenIcon className="h-5 w-5" />} />
-                        <TabButton tabName="ai-assistant" label="Assistente IA" icon={<SparklesIcon className="h-5 w-5" />} />
+                     <div className="flex items-center space-x-4">
+                        <div className="flex items-center space-x-2 bg-slate-100 p-1 rounded-lg">
+                            <TabButton tabName="destinations" label="Explorar Roteiros" icon={<CompassIcon className="h-5 w-5" />} />
+                            <TabButton tabName="itineraries" label="Meus Itinerários" icon={<BookOpenIcon className="h-5 w-5" />} />
+                            <TabButton tabName="ai-assistant" label="Assistente IA" icon={<SparklesIcon className="h-5 w-5" />} />
+                        </div>
+                        {installPromptEvent && (
+                            <button
+                                onClick={handleInstallClick}
+                                className="flex items-center space-x-2 px-3 py-2 rounded-lg font-semibold transition-colors text-sm bg-cyan-50 text-cyan-700 hover:bg-cyan-100 border border-cyan-200"
+                            >
+                                <DownloadIcon className="h-5 w-5" />
+                                <span>Instalar App</span>
+                            </button>
+                        )}
                     </div>
                 </nav>
             </header>
