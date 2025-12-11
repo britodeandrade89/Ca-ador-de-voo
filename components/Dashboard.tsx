@@ -5,6 +5,7 @@ import Destinations from './Destinations';
 import ItineraryCard from './ItineraryCard';
 import ItineraryDetailsModal from './ItineraryDetailsModal';
 import AiAssistant from './AiAssistant';
+import ImageUploader from './ImageUploader';
 import { CompassIcon, BookOpenIcon, SparklesIcon, DownloadIcon } from './icons';
 import { initialItineraries } from '../itineraries';
 
@@ -33,6 +34,31 @@ const Dashboard: React.FC<DashboardProps> = ({ installPromptEvent, onInstallSucc
         });
     };
 
+    const handleItineraryCreated = (itineraryData: Omit<Itinerary, 'id' | 'savedDate'>) => {
+        const newItinerary: Itinerary = {
+            ...itineraryData,
+            id: Date.now(),
+            savedDate: new Date().toISOString().split('T')[0]
+        };
+        setItineraries(prev => [newItinerary, ...prev]);
+        // Garante que a aba de itinerários esteja ativa para ver o novo item
+        if (activeTab !== 'itineraries') {
+            setActiveTab('itineraries');
+        }
+    };
+
+    const handleApiKeyError = async () => {
+        if (window.aistudio && window.aistudio.openSelectKey) {
+            try {
+                await window.aistudio.openSelectKey();
+            } catch (e) {
+                console.error("Erro ao tentar abrir o seletor de chave:", e);
+            }
+        } else {
+             alert("A chave de API não foi detectada. Por favor, verifique se ela está configurada corretamente no ambiente.");
+        }
+    };
+
     const renderContent = () => {
         switch (activeTab) {
             case 'destinations':
@@ -47,6 +73,14 @@ const Dashboard: React.FC<DashboardProps> = ({ installPromptEvent, onInstallSucc
                             <h2 className="text-4xl font-extrabold text-slate-800">Meus Itinerários</h2>
                             <p className="text-slate-500 mt-2 text-lg">Aqui estão todas as suas passagens e planos de viagem salvos.</p>
                         </div>
+                        
+                        <div className="mb-8">
+                            <ImageUploader 
+                                onItineraryCreated={handleItineraryCreated} 
+                                onApiKeyError={handleApiKeyError} 
+                            />
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
                         {itineraries.map(itinerary => (
                             <ItineraryCard key={itinerary.id} itinerary={itinerary} onSelect={setSelectedItinerary} />

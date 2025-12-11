@@ -300,4 +300,12 @@ export const ThumbsUpIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => 
 
 export const ThumbsDownIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M17.367 13.75c-.806 0-1.533.446-2.031 1.08a9.041 9.041 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.498 4.498 0 0 0-.322 1.672V21.25a.75.75 0 0 1-.75.75 2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.874c-1.026 0-1.945-.694-2.054-1.715A11.94 11.94 0 0 1 1.75 12c0-.435.023-.863.068-1.285.109-1.022 1.028-1.715 2.054-1.715h3.126c.618 0 .991-.724.725-1.282A7.471 7.471 0 0 1 7.5 
+      <path strokeLinecap="round" strokeLinejoin="round" d="M17.367 13.75c-.806 0-1.533.446-2.031 1.08a9.041 9.041 0 0 1-2.861 2.4c-.723.384-1.35.956-1.653 1.715a4.498 4.498 0 0 0-.322 1.672V21.25a.75.75 0 0 1-.75.75 2.25 2.25 0 0 1-2.25-2.25c0-1.152.26-2.243.723-3.218.266-.558-.107-1.282-.725-1.282H3.874c-1.026 0-1.945-.694-2.054-1.715A11.94 11.94 0 0 1 1.75 12c0-.435.023-.863.068-1.285.109-1.022 1.028-1.715 2.054-1.715h3.126c.618 0 .991-.724.725-1.282A7.471 7.471 0 0 1 7.5" />
+    </svg>
+);
+
+export const WifiIcon: React.FC<React.SVGProps<SVGSVGElement>> = (props) => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M8.288 15.038a5.25 5.25 0 0 1 7.424 0M5.106 11.856c3.807-3.808 9.98-3.808 13.788 0M1.924 8.674c5.565-5.565 14.587-5.565 20.152 0M12.53 18.22l-.53.53-.53-.53a.75.75 0 0 1 1.06 0Z" />
+    </svg>
+);
